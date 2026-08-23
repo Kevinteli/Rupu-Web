@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RÜPÜ Robotics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=block"
+        rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="js/tailwind-config.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- 3D Model Viewer (Google) -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+</head>
+
+<body class="bg-background text-on-background font-body-md selection:bg-rojito/20">
+
+    <!-- Header Fijo -->
+    <header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50 h-20">
+        <div class="flex justify-between items-center px-6 w-full max-w-7xl mx-auto h-full">
+            <div class="flex items-center gap-8">
+                <a id="nav-logo" class="flex items-center hover:opacity-80 transition-opacity spa-link" href="#inicio"
+                    data-view="inicio"><img alt="RÜPÜ Home" class="h-12 w-auto object-contain border-none"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo" /></a>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a id="nav-inicio"
+                    class="relative group spa-link font-body-md text-lg text-on-primary/80 transition-all duration-200 active:scale-95 py-1"
+                    href="#inicio" data-view="inicio">Sobre el Proyecto<span
+                        class="absolute bottom-0 left-0 w-full h-[2px] bg-on-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span></a>
+                <a id="nav-docs"
+                    class="relative group spa-link font-body-md text-lg text-on-primary/80 transition-all duration-200 active:scale-95 py-1"
+                    href="#entorno" data-view="entorno">Documentación<span
+                        class="absolute bottom-0 left-0 w-full h-[2px] bg-on-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span></a>
+                <a id="nav-galeria"
+                    class="relative group spa-link font-body-md text-lg text-on-primary/80 transition-all duration-200 active:scale-95 py-1"
+                    href="#galeria" data-view="galeria">Demostraciones<span
+                        class="absolute bottom-0 left-0 w-full h-[2px] bg-on-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span></a>
+            </nav>
+            <div class="flex items-center gap-stack-md">
+                <div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
+                    <input
+                        class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32 outline-none"
+                        placeholder="Buscar..." type="text" />
+                </div>
+                <button
+                    class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenedor Maestro -->
+    <div id="master-container" class="flex max-w-7xl mx-auto min-h-screen pt-20">
+
+        <!-- Sidebar Fijo (Oculto en Inicio y Galeria) -->
+        <aside id="app-sidebar"
+            class="hidden md:flex flex-col py-8 gap-4 w-64 h-[calc(100vh-80px)] sticky top-20 bg-surface border-r border-outline-variant shrink-0">
+            <div class="px-6 mb-4 text-center">
+                <h2 class="font-headline-md text-primary text-2xl font-bold">Guías Técnicas</h2>
+                <p class="font-label-md text-label-md text-secondary">Documentación v1.0</p>
+            </div>
+            <nav class="flex-1 flex flex-col gap-1">
+                <a id="side-entorno"
+                    class="group spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors nav-link"
+                    href="#entorno" data-view="entorno">
+                    <span
+                        class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform duration-300">computer</span><span
+                        class="font-body-md text-lg">Entorno de Trabajo</span>
+                </a>
+                <a id="side-armado"
+                    class="group spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors nav-link"
+                    href="#armado" data-view="armado">
+                    <span
+                        class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform duration-300">precision_manufacturing</span><span
+                        class="font-body-md text-lg">Armado de RÜPÜ</span>
+                </a>
+                <a id="side-programacion"
+                    class="group spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors nav-link"
+                    href="#programacion" data-view="programacion">
+                    <span
+                        class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform duration-300">code_blocks</span><span
+                        class="font-body-md text-lg">Programación</span>
+                </a>
+                <a id="side-calibracion"
+                    class="group spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 hover:text-on-surface transition-colors nav-link"
+                    href="#calibracion" data-view="calibracion">
+                    <span
+                        class="material-symbols-outlined text-[20px] group-hover:rotate-12 transition-transform duration-300">tune</span><span
+                        class="font-body-md text-lg">Calibración</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Area Dinámica Principal -->
+        <main id="app-content" class="flex-1 w-full overflow-x-hidden">
+            <div id="view-inicio" class="view-section hidden w-full">
+                <main class="technical-grid min-h-screen relative pt-16 md:pt-0">
+                    <!-- Added padding for mobile since header is fixed -->
+                    <!-- Hero Section -->
+                    <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-black" id="hero-section">
+                        <div class="absolute inset-0 z-0" id="hero-bg-wrapper">
+                            <img alt="A sophisticated close-up of a RÜPÜ robotic platform wheel and chassis, glowing with subtle red LED status indicators in a dark, high-tech engineering laboratory."
+                                class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl5_bfM1YvU4MUZYYorXx48mBpBxAVFxpTneluTDjDMZSKbVjREp8SCwxay_gcGGrKfcvxXIGwldLoWY3xTtIm1RAaDs5KXyHwzeoizu9NDA-X8NUguWCbRuiUK5sBwJJu5UOFSm7Fba63dKMQjcc133xtv7LrhEuaKeFqlsETNz1c3EqCW5T0_3HtRwo4AHLnlnuN_EzdRJ6qiqbeSWd-xjx3GMh4VsYT9hGlLJo-QFZZhfnXPhDZ4agj8uRXYK321xnLKmr-ke9gpiY" />
+                            <div class="absolute inset-0 hero-gradient"></div>
+                        </div>
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 z-40"><a
+                                class="bg-[#d32f2f] text-white p-3 flex items-center gap-2 font-bold font-label-md text-label-md uppercase tracking-widest floating-cta shadow-lg hover:pr-5 transition-all"
+                                href="#"><span class="material-symbols-outlined transform -rotate-90">link</span>Free
+                                System Trial</a></div>
+                        <div
+                            class="relative z-10 w-full max-w-container-max-width mx-auto px-gutter grid grid-cols-12 gap-gutter">
+                            <div class="col-span-12 md:col-span-10 lg:col-span-8 flex flex-col gap-stack-lg">
+                                <h1 class="flex flex-col"><span
+                                        class="text-[#d32f2f] font-headline-lg text-headline-lg uppercase tracking-tight mb-2">TRANSFORMANDO
+                                        EXPERIENCIAS</span><span
+                                        class="text-white font-headline-lg text-headline-lg uppercase tracking-tight leading-tight">PLATAFORMA
+                                        PARA EL ESTUDIO DE PLATOONING</span></h1>
+                                <p
+                                    class="text-secondary-fixed text-body-lg font-body-lg max-w-2xl leading-relaxed mt-4">
+                                    RÜPÜ ofrece a la comunidad académica un ecosistema diverso de soluciones para
+                                    enriquecer experiencias de laboratorio prácticas y permitir una investigación de
+                                    ingeniería eficiente en control distribuido multivariable.</p>
+                                <div class="flex flex-wrap gap-stack-md mt-stack-md"><a
+                                        class="bg-[#d32f2f] text-white px-8 py-4 font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-[#d32f2f] transition-all duration-300 inline-block spa-link"
+                                        href="#" data-view="entorno">Explorar Guía Técnica</a><a
+                                        class="border-2 border-white text-white px-8 py-4 font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 inline-block spa-link"
+                                        href="#" data-view="galeria">Ver Demostraciones</a></div>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-10 right-gutter z-20 hidden lg:block" id="ayuda-popup">
+                            <div
+                                class="bg-black/60 backdrop-blur-md p-stack-md border border-white/20 w-[300px] shadow-2xl relative">
+                                <div class="flex justify-between items-start mb-stack-sm">
+                                    <h4 class="text-white font-bold font-label-md text-label-md">¿Necesitas ayuda
+                                        técnica?</h4>
+                                    <span
+                                        class="material-symbols-outlined text-white text-sm cursor-pointer opacity-50 hover:opacity-100"
+                                        onclick="document.getElementById('ayuda-popup').style.display = 'none';">close</span>
+                                </div>
+                                <p class="text-white/80 font-body-md text-body-md mb-stack-md">Nuestro equipo de
+                                    ingenieros de aplicaciones está listo para apoyarte.</p>
+                                <button
+                                    class="w-full bg-[#d32f2f] text-white py-3 font-bold font-label-md text-label-md uppercase tracking-wider hover:opacity-90 hover:shadow-lg active:scale-95 transition-all duration-300">Reservar
+                                    Reunión</button>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Technical Highlights -->
+                    <section class="bg-surface-white border-y border-outline-variant py-section-padding">
+                        <div class="max-w-container-max-width mx-auto px-gutter">
+                            <div class="text-center mb-stack-lg">
+                                <h2 class="font-headline-md text-headline-md text-on-surface">Arquitectura del Sistema
+                                </h2>
+                                <p class="text-secondary font-body-md max-w-2xl mx-auto mt-stack-sm">
+                                    Diseñado bajo principios de rigurosidad académica para permitir la validación de
+                                    modelos matemáticos complejos en entornos controlados.
+                                </p>
+                            </div>
+                            <div class="grid md:grid-cols-3 gap-stack-lg">
+                                <!-- Low Cost -->
+                                <div
+                                    class="bg-background border border-outline-variant p-stack-lg rounded hover:border-rojito hover:ring-1 hover:ring-rojito hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                                    <div
+                                        class="w-12 h-12 bg-rojito/10 rounded-lg flex items-center justify-center mb-stack-md group">
+                                        <span
+                                            class="material-symbols-outlined text-rojito text-[32px] group-hover:scale-110 transition-transform duration-300">payments</span>
+                                    </div>
+                                    <h3 class="font-headline-md text-headline-md mb-2">Bajo Costo</h3>
+                                    <p class="font-body-md text-secondary">
+                                        Implementación accesible mediante componentes comerciales off-the-shelf y
+                                        fabricación mediante impresión 3D, democratizando el acceso a plataformas de
+                                        experimentación avanzada.
+                                    </p>
+                                </div>
+                                <!-- Platooning Focus -->
+                                <div
+                                    class="bg-background border border-outline-variant p-stack-lg rounded hover:border-rojito hover:ring-1 hover:ring-rojito hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                                    <div
+                                        class="w-12 h-12 bg-rojito/10 rounded-lg flex items-center justify-center mb-stack-md group">
+                                        <span
+                                            class="material-symbols-outlined text-rojito text-[32px] group-hover:scale-110 transition-transform duration-300">dynamic_feed</span>
+                                    </div>
+                                    <h3 class="font-headline-md text-headline-md mb-2">Foco en Platooning</h3>
+                                    <p class="font-body-md text-secondary">
+                                        Librerías especializadas para el seguimiento de trayectorias, mantenimiento de
+                                        distancias inter-vehiculares y comunicación V2V en tiempo real.
+                                    </p>
+                                </div>
+                                <!-- Modularity -->
+                                <div
+                                    class="bg-background border border-outline-variant p-stack-lg rounded hover:border-rojito hover:ring-1 hover:ring-rojito hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+                                    <div
+                                        class="w-12 h-12 bg-rojito/10 rounded-lg flex items-center justify-center mb-stack-md group">
+                                        <span
+                                            class="material-symbols-outlined text-rojito text-[32px] group-hover:scale-110 transition-transform duration-300">extension</span>
+                                    </div>
+                                    <h3 class="font-headline-md text-headline-md mb-2">Modularidad HW/SW</h3>
+                                    <p class="font-body-md text-secondary">
+                                        Estructura desacoplada que permite intercambiar sensores, actuadores y
+                                        algoritmos de nivel superior sin afectar la base motriz diferencial.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Image Paragraph Block -->
+                    <section class="max-w-container-max-width mx-auto px-gutter py-section-padding">
+                        <div
+                            class="image-paragraph-container bg-surface-white p-stack-lg border border-outline-variant rounded-xl">
+                            <div class="flex-1 space-y-stack-md">
+                                <h2 class="font-headline-md text-headline-md text-on-surface">Validación de Control
+                                    Distribuido</h2>
+                                <p class="font-body-md text-secondary">
+                                    La plataforma RÜPÜ permite a los investigadores implementar y probar estrategias de
+                                    control cooperativo. A través de nuestro código, es posible
+                                    configurar parámetros cinemáticos y dinámicos con precisión.
+                                </p>
+                                <div
+                                    class="bg-inverse-surface p-4 rounded font-code-sm text-code-sm text-surface-bright overflow-x-auto">
+                                    <pre><code>// Configuración de Platooning RÜPÜ
+RobotAgent agent = new RobotAgent("RU-01");
+agent.setController(new PIDLeaderFollower(0.5, 0.1, 0.01));
+agent.connectToSwarm("swarm_net_01");
+agent.startFormation();</code></pre>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-full md:w-[400px]">
+                                <img alt="A detailed macro view of an electronic circuit board used in the RUPU robotics system, featuring a central microcontroller and specialized motor driver chips. The board is clean and professional, with clear silkscreen labels. The lighting emphasizes the textures of the soldering and copper traces, creating a high-tech academic feel. The overall image has a cool, clinical aesthetic with subtle red highlights on technical components."
+                                    class="w-full h-[300px] object-cover rounded border border-outline-variant"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR_ZzTXD5q3hy7XExS0xDe0EcMpaYImEfGt1jAfOBNFQ-_URbO3H-Du388pT3yQP3EBvFe9ff0F5R1m5HUD3Z-OlZ6IPvNQfli6xTOEoeqJJCxDQ2iT2I1Si4QdQJcAdxYzuAFKbK4ZxQw3KcTn70t3K0wYfnyzWooKw6la0_NwPy-UtkQJjfcU3mCWlU9QNSUTx5rWRCC14XVXXhPqqtq5Rzdcob6Kf1syUgXCgYSCwpwZ4aACa7mn6AGWoFG63RaoKFJvEpWWS11" />
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Institutions Carousel -->
+                    <section
+                        class="bg-primary py-8 overflow-hidden relative w-full mt-24 mb-24 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                        <div class="animate-marquee flex items-center gap-24 text-surface-white pr-24">
+                            <!-- Group 1 -->
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">account_balance</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">UTFSM</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">science</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">ANID</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">precision_manufacturing</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">CORFO</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">public</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">IEEE</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">biotech</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">MinCiencia</span>
+                            </div>
+                            <!-- Group 2 -->
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">account_balance</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">UTFSM</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">science</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">ANID</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">precision_manufacturing</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">CORFO</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">public</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">IEEE</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">biotech</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">MinCiencia</span>
+                            </div>
+                            <!-- Group 3 -->
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">account_balance</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">UTFSM</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">science</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">ANID</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">precision_manufacturing</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">CORFO</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">public</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">IEEE</span></div>
+                            <div class="flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                onclick="openLogoModal(this)"><span
+                                    class="material-symbols-outlined text-[40px]">biotech</span><span
+                                    class="font-bold text-xl leading-tight uppercase tracking-widest">MinCiencia</span>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <!-- Footer -->
+                <footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant">
+                    <div
+                        class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
+                        <div class="flex flex-row gap-4 items-center">
+                            <div class="flex items-center gap-2">
+                                <img alt="RÜPÜ Logo" class="w-[60px] opacity-80 transform -translate-y-1"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBALmme-AbmBhij6kCnuXPL-yLbWEZ7gn1HUTQXVSXF0l5T7UfWojh4LNH5gvm9V8VjJ9oF2EzEk9jfAJkP46GwHC17k2Cj-u4mjfKd5N7EME870huGCwDZ6qOlmbq0xCbC5kGqQVR7aV_cC039AIeaaZs5ddoJMX5zpmeCbj8GXZ0Uy0Yn-AX4hp7yw6fIh1oSnLgdd-UDmTq3fgsQwevQkQwoBHBZjXAieqzMC-tklZ8nPTfJlAJh_YLWE17F_ya2J1z1yxSSSBO2o_Y" />
+                            </div>
+                            <p class="font-label-md text-label-md text-on-primary/60 m-0">© 2026 RÜPÜ Robotics System
+                                UTFSM. Todos los derechos reservados.</p>
+                        </div>
+                        <div class="flex gap-stack-lg mt-stack-md md:mt-0">
+                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                                href="https://github.com/example/rupu-robotics" target="_blank"
+                                rel="noopener noreferrer">Repositorio GitHub</a>
+                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                                href="#">Licencia MIT</a>
+                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                                href="#">Contacto</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <div id="view-entorno" class="view-section hidden px-gutter py-stack-lg w-full">
+                <div class="max-w-4xl">
+                    <div class="mb-12">
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Entorno de
+                            Trabajo</h1>
+                        <p class="font-body-lg text-body-lg text-secondary max-w-2xl">
+                            Configuración inicial del software necesario para la implementación del sistema de control
+                            multivariable en plataformas RÜPÜ.
+                        </p>
+                    </div>
+                    <!-- Step 1: Installation -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex flex-col md:flex-row gap-gutter">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-2 mb-4">
+                                    <span
+                                        class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">1</span>
+                                    <h3 class="font-headline-md text-headline-md text-on-surface">Instalación de Core
+                                        Software</h3>
+                                </div>
+                                <p class="text-body-md font-body-md mb-6 text-on-surface-variant">
+                                    Para comenzar con el desarrollo, es imperativo contar con las versiones estables de
+                                    los compiladores e intérpretes. Se recomienda el uso de las versiones especificadas
+                                    para garantizar compatibilidad con las librerías de control.
+                                </p>
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-rojito mt-1">download</span>
+                                        <div>
+                                            <p class="font-bold text-on-surface">Arduino IDE v2.1.1</p>
+                                            <p class="text-sm text-secondary">Entorno de desarrollo para la carga de
+                                                firmware en controladores ESP32.</p>
+                                        </div>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="material-symbols-outlined text-rojito mt-1">terminal</span>
+                                        <div>
+                                            <p class="font-bold text-on-surface">Python 3.x.x</p>
+                                            <p class="text-sm text-secondary">Necesario para la telemetría y el
+                                                procesamiento de datos en tiempo real.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="w-full md:w-64">
+                                <img class="w-full h-48 object-cover rounded-lg border border-outline-variant"
+                                    data-alt="A clean top-down view of a modern engineering workspace with an open laptop showing Python code and an Arduino board connected via USB."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh80QDw6v_TMgQIV6WZK09bCaFT3v1AuGfvoYnXB4l0-rAhbrYxz5gCrgZb9fa9igLhCPKoSyTiMeGA3h6zJJK6tSIKjruJGtXMaXeJ3oegkcf4LexPW8OA77ddjLXEUsbD6jlfXdmk9S-bwTc-NsHElw3wCRTZKUqkd3vRyAlqhLDijMKY0LXl4HWRwyIxsdMw_bhxZxMRREhp3bUqiWmqbyc4RcUkmlPx-DeFOaknQ2cemrsHkPuO7zrfvK3liA7YbWtr9_l_ovO" />
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Step 2: Arduino Setup -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">2</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Configuración de Arduino</h3>
+                        </div>
+                        <p class="text-body-md font-body-md mb-4 text-on-surface-variant">
+                            Para habilitar el soporte de tarjetas ESP32 en el IDE, debe agregar la URL del gestor de
+                            tarjetas en <strong>Preferencias</strong>:
+                        </p>
+                        <div class="code-container mb-4" style="cursor: pointer;" title="Haga clic para simular copia">
+                            https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+                        </div>
+                        <div class="bg-surface-container-low p-4 border-l-4 border-rojito">
+                            <p class="text-label-md font-label-md text-on-surface flex items-center gap-2">
+                                <span class="material-symbols-outlined text-rojito">info</span>
+                                Nota técnica: Instale la versión 'ESP32 by Espressif Systems' desde el Board Manager
+                                tras agregar el link.
+                            </p>
+                        </div>
+                    </section>
+                    <!-- Step 3: Python Env -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">3</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Entorno Python y Pip</h3>
+                        </div>
+                        <p class="text-body-md font-body-md mb-4 text-on-surface-variant">
+                            Configure el entorno virtual para evitar conflictos de dependencias. Ejecute los siguientes
+                            comandos en su terminal:
+                        </p>
+                        <div class="code-container space-y-2" style="cursor: pointer;"
+                            title="Haga clic para simular copia">
+                            <div class="flex items-center justify-between">
+                                <span class=""># Crear entorno virtual</span>
+                                <span class="text-xs text-secondary">Bash</span>
+                            </div>
+                            <div class="text-primary-fixed-dim">python -m venv rupu_env</div>
+                            <div class="mt-4"># Activar entorno (Windows)</div>
+                            <div class="text-primary-fixed-dim">.\rupu_env\Scripts\activate</div>
+                            <div class="mt-4"># Instalación de dependencias críticas</div>
+                            <div class="text-primary-fixed-dim">pip install numpy scipy matplotlib pyserial</div>
+                        </div>
+                    </section>
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-end items-center py-stack-lg border-t border-outline-variant mt-8">
+                        <a class="spa-link flex items-center gap-2 bg-rojito text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+                            href="#armado" data-view="armado">
+                            Siguiente: Armado
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="view-armado" class="view-section hidden px-gutter py-stack-lg w-full">
+                <div class="max-w-4xl">
+                    <div class="mb-12">
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Armado de
+                            RÜPÜ</h1>
+                        <p class="font-body-lg text-body-lg text-secondary max-w-2xl">Guía detallada para el ensamblaje
+                            mecánico y la integración de componentes electrónicos del robot RÜPÜ.</p>
+                    </div>
+                    
+                    <!-- Visor 3D -->
+                    <div class="mb-12 w-full h-[500px] bg-[#f8f9fa] rounded-xl overflow-hidden border border-outline-variant relative shadow-inner">
+                        <div class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 flex-col">
+                            <span class="material-symbols-outlined text-6xl mb-2 text-primary animate-pulse">3d_rotation</span>
+                            <p class="font-bold text-secondary">Cargando Ensamblaje 3D...</p>
+                        </div>
+                        
+                        <!-- Controles de Cámara -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-outline-variant/50">
+                            <span class="text-xs font-bold text-secondary mr-2 uppercase tracking-widest hidden md:block">Vistas:</span>
+                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Frontal</button>
+                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '90deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Lateral</button>
+                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 0deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Superior</button>
+                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '45deg 55deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Isométrica</button>
+                        </div>
+
+                        <model-viewer
+                            id="visor-rupu"
+                            src="assets/models/Idea%20soporte%20Horn%20V1%20v1.glb"
+                            alt="Modelo 3D RÜPÜ"
+                            auto-rotate
+                            camera-controls
+                            shadow-intensity="1"
+                            camera-orbit="45deg 55deg 105%"
+                            style="width: 100%; height: 100%; background-color: transparent; z-index: 10; position: relative;"
+                        ></model-viewer>
+                    </div>
+
+                    <!-- Step 1: Installation -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6"><span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">1</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Preparación de Componentes
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="p-4 border border-outline-variant rounded-lg"><span
+                                    class="material-symbols-outlined text-primary mb-2">precision_manufacturing</span>
+                                <p class="font-bold">Chasis 3D</p>
+                                <p class="text-sm text-secondary">Estructura principal impresa en PLA/PETG.</p>
+                            </div>
+                            <div class="p-4 border border-outline-variant rounded-lg"><span
+                                    class="material-symbols-outlined text-primary mb-2">settings_input_component</span>
+                                <p class="font-bold">Motores</p>
+                                <p class="text-sm text-secondary">2x Motores DC con reducción y encoders.</p>
+                            </div>
+                            <div class="p-4 border border-outline-variant rounded-lg"><span
+                                    class="material-symbols-outlined text-primary mb-2">sensors</span>
+                                <p class="font-bold">Sensores</p>
+                                <p class="text-sm text-secondary">Kit de sensores ultrasónicos e infrarrojos.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Step 2: Arduino Setup -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6"><span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">2</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Montaje Mecánico</h3>
+                        </div>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-4 p-3 bg-surface-container-low rounded-lg"><span
+                                    class="font-bold text-primary">01</span><span>Ensamblaje de la base y soportes de
+                                    batería.</span></li>
+                            <li class="flex items-center gap-4 p-3 bg-surface-container-low rounded-lg"><span
+                                    class="font-bold text-primary">02</span><span>Instalación de motores y acople de
+                                    ruedas.</span></li>
+                            <li class="flex items-center gap-4 p-3 bg-surface-container-low rounded-lg"><span
+                                    class="font-bold text-primary">03</span><span>Fijación de sensores y placa
+                                    controladora.</span></li>
+                        </ul>
+                    </section>
+                    <!-- Step 3: Python Env -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6"><span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">3</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Conexiones Eléctricas</h3>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead class="bg-surface-container-high">
+                                    <tr>
+                                        <th class="p-3 border border-outline-variant font-bold">Componente</th>
+                                        <th class="p-3 border border-outline-variant font-bold">Pin Sensor</th>
+                                        <th class="p-3 border border-outline-variant font-bold">Pin ESP32</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-3 border border-outline-variant">Sensor Ultra</td>
+                                        <td class="p-3 border border-outline-variant">TRIG</td>
+                                        <td class="p-3 border border-outline-variant">D8</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 border border-outline-variant">Sensor Ultra</td>
+                                        <td class="p-3 border border-outline-variant">ECHO</td>
+                                        <td class="p-3 border border-outline-variant">D9</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between items-center py-stack-lg border-t border-outline-variant mt-8">
+                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                            href="#entorno" data-view="entorno"><span
+                                class="material-symbols-outlined">arrow_back</span>Anterior: Entorno de Trabajo</a>
+                        <a class="spa-link flex items-center gap-2 bg-rojito text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+                            href="#programacion" data-view="programacion">Siguiente: Programación<span
+                                class="material-symbols-outlined">arrow_forward</span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="view-programacion" class="view-section hidden px-gutter py-stack-lg w-full">
+                <section class="max-w-4xl">
+                    <div class="mb-12">
+                        <span
+                            class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 inline-block">Módulo
+                            Avanzado</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Programación
+                            y Control</h1>
+                        <p class="font-body-lg text-body-lg text-secondary max-w-2xl">Configuración de red
+                            descentralizada y flujos de trabajo secuenciales para el control del sistema robótico RÜPÜ.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                        <div class="glass-card p-6 rounded-xl">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span
+                                    class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">hub</span>
+                                <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Topología
+                                    Leader/Follower</h3>
+                            </div>
+                            <p class="text-sm text-secondary mb-4">El sistema utiliza una arquitectura de red donde una
+                                unidad central coordina las peticiones mientras los periféricos ejecutan tareas locales
+                                de baja latencia.</p>
+                            <div class="p-4 bg-surface-container rounded-lg">
+                                <div class="flex justify-between text-xs font-bold mb-2">
+                                    <span class="">LEADER</span>
+                                    <span class="text-primary">ACTIVO</span>
+                                </div>
+                                <div class="h-2 w-full bg-outline-variant rounded-full overflow-hidden">
+                                    <div class="h-full bg-primary w-full animate-pulse"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="glass-card p-6 rounded-xl overflow-hidden relative group transition-all duration-700">
+                            <img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-105 transition-transform duration-700"
+                                data-alt="A clean, futuristic schematic showing a network topology with glowing nodes connected by crimson red lines."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9VjJ0Bq9B3B8Uv31vh6PuDXOSiYg2OKZicUT3ruXRN2Mm1sp8Yo9mO8Y8xSAYCcxcdK1uhRsgJGHxahlboLSQgpLUXkQALzAKmOytOdOF9p4OvyvlsCtxYRPaBQkgp9Iy2i5TmUFbR4eSIXPuMH7ePzVz14HFPCHC78GAgs21PmaxHoo45630RS-w8eZB8YTQFaYxI2E98bIV97h4lscCoJIQI5CYSNqhSnrEs928YU74Aq0jJjrFKhA_pVPxRAovt5F0KJeJf4fC" />
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <span
+                                        class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">terminal</span>
+                                    <h3 class="font-headline-md text-headline-md text-on-surface font-bold">Monitoreo de
+                                        IP</h3>
+                                </div>
+                                <p class="text-sm text-secondary mb-4">Verifique la conectividad y asigne direcciones
+                                    estáticas para evitar colisiones en el segmento de red.</p>
+                                <code class="block bg-on-surface text-surface px-4 py-2 rounded text-xs font-mono">
+<span class="text-primary-fixed-dim">$</span> ipconfig <span class="text-outline-variant">/</span> ip a
+                            </code>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h2
+                            class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">map</span>
+                            Mapping de Dispositivos
+                        </h2>
+                        <div
+                            class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-primary text-on-primary">
+                                        <th class="p-4 font-bold text-sm">ID Robot</th>
+                                        <th class="p-4 font-bold text-sm">Rol Designado</th>
+                                        <th class="p-4 font-bold text-sm">Rango IP</th>
+                                        <th class="p-4 font-bold text-sm">Protocolo</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant">
+                                    <tr class="hover:bg-primary/5 transition-colors">
+                                        <td class="p-4 font-mono text-sm">RP-01-L</td>
+                                        <td class="p-4 text-sm font-semibold">Master Leader</td>
+                                        <td class="p-4 text-sm">192.168.1.10</td>
+                                        <td class="p-4"><span
+                                                class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">TCP/IP</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-primary/5 transition-colors">
+                                        <td class="p-4 font-mono text-sm">RP-02-F</td>
+                                        <td class="p-4 text-sm">Follower A</td>
+                                        <td class="p-4 text-sm">192.168.1.11</td>
+                                        <td class="p-4"><span
+                                                class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">UDP</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-primary/5 transition-colors">
+                                        <td class="p-4 font-mono text-sm">RP-03-F</td>
+                                        <td class="p-4 text-sm">Follower B</td>
+                                        <td class="p-4 text-sm">192.168.1.12</td>
+                                        <td class="p-4"><span
+                                                class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">UDP</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-8">Flujo de Carga
+                            Secuencial</h2>
+                        <div
+                            class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/20 before:via-primary before:to-primary/20">
+                            <div
+                                class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+                                <div
+                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+                                    1</div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+                                    <h4 class="font-bold mb-2">Inicialización de Kernel</h4>
+                                    <p class="text-sm text-secondary">Carga los drivers base y el sistema de gestión de
+                                        memoria del robot.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+                                <div
+                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+                                    2</div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+                                    <h4 class="font-bold mb-2">Handshake de Red</h4>
+                                    <p class="text-sm text-secondary">Sincronización de reloj maestro y validación de
+                                        IPs según la tabla de mapping.</p>
+                                </div>
+                            </div>
+                            <div
+                                class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+                                <div
+                                    class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">
+                                    3</div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+                                    <h4 class="font-bold mb-2">Inyección de Script</h4>
+                                    <p class="text-sm text-secondary">Despliegue de binarios .hex o scripts .py en la
+                                        memoria flash de cada unidad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-inverse-surface rounded-2xl p-8 text-surface shadow-xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-10">
+                            <span class="material-symbols-outlined text-[120px]">gamepad</span>
+                        </div>
+                        <div class="relative z-10">
+                            <h2
+                                class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary-fixed-dim">dashboard</span>
+                                Instrucciones de la GUI
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="border-l-2 border-primary-fixed-dim pl-4">
+                                    <span
+                                        class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso
+                                        1</span>
+                                    <p class="mt-2 text-sm text-on-inverse-surface">Abra <code
+                                            class="bg-white/10 px-1 rounded">RupuControl.exe</code> y seleccione el
+                                        puerto serial COM correspondiente.</p>
+                                </div>
+                                <div class="border-l-2 border-primary-fixed-dim pl-4">
+                                    <span
+                                        class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso
+                                        2</span>
+                                    <p class="mt-2 text-sm text-on-inverse-surface">Haga clic en 'Scan Network' para
+                                        detectar todos los robots Follower en línea.</p>
+                                </div>
+                                <div class="border-l-2 border-primary-fixed-dim pl-4">
+                                    <span
+                                        class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso
+                                        3</span>
+                                    <p class="mt-2 text-sm text-on-inverse-surface">Use el Joystick virtual o los
+                                        comandos de consola para enviar macros en tiempo real.</p>
+                                </div>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-white/10 flex flex-wrap gap-4">
+                                <a class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all"
+                                    href="#">
+                                    <span class="material-symbols-outlined">download</span>
+                                    Descargar GUI
+                                </a>
+                                <button
+                                    class="bg-white/10 text-on-primary border border-white/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-white/20 active:scale-95 transition-all">
+                                    <span class="material-symbols-outlined">description</span>
+                                    Ver API Docs
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between items-center py-stack-lg border-t border-outline-variant mt-8">
+                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                            href="#armado" data-view="armado"><span
+                                class="material-symbols-outlined">arrow_back</span>Anterior: Armado</a>
+                        <a class="spa-link flex items-center gap-2 bg-rojito text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+                            href="#calibracion" data-view="calibracion">Siguiente: Calibración<span
+                                class="material-symbols-outlined">arrow_forward</span></a>
+                    </div>
+                </section>
+            </div>
+            <div id="view-calibracion" class="view-section hidden px-gutter py-stack-lg w-full">
+                <section class="max-w-4xl">
+                    <div class="mb-12">
+                        <span
+                            class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 inline-block">Módulo
+                            de Ajuste</span>
+                        <h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Calibración
+                            de RÜPÜ</h1>
+                        <p class="font-body-lg text-body-lg text-secondary max-w-2xl">Procedimientos finales para
+                            asegurar la precisión de los sensores y la respuesta dinámica del sistema.</p>
+                    </div>
+                    <div class="mb-12">
+                        <h2
+                            class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">analytics</span>
+                            1. Calibración de Sensores
+                        </h2>
+                        <div
+                            class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-primary text-on-primary">
+                                        <th class="p-4 font-bold text-sm">Sensor</th>
+                                        <th class="p-4 font-bold text-sm">Parámetro</th>
+                                        <th class="p-4 font-bold text-sm">Rango</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant">
+                                    <tr class="hover:bg-primary/5 transition-colors">
+                                        <td class="p-4 text-sm">IR QTR-8A</td>
+                                        <td class="p-4 font-mono text-sm">thresh_black</td>
+                                        <td class="p-4 text-sm">600 - 850</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h2
+                            class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+                            2. Pruebas de Movimiento
+                        </h2>
+                        <div class="glass-card p-6 rounded-xl">
+                            <p class="text-sm text-secondary mb-4">Ejecute el siguiente script para validar la
+                                cinemática inversa y los límites de los actuadores.</p>
+                            <pre><code><span class="code-accent">void</span> <span class="text-primary-fixed-dim">testKinematics</span>() {
+  <span class="code-string">// Mover a posición neutral</span>
+  robot.moveTo(<span class="text-outline-variant">0, 0, 100</span>);
+  delay(<span class="text-outline-variant">1000</span>);
+  <span class="code-string">// Validar límites de torque</span>
+  <span class="code-accent">if</span> (robot.checkTorque() &gt; <span class="text-outline-variant">MAX_LIMIT</span>) {
+    Serial.println(<span class="code-string">"Error: Calibración requerida"</span>);
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                    <div class="mb-12">
+                        <h2
+                            class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">sync_alt</span>
+                            3. Sincronización de Red
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="glass-card p-6 rounded-xl">
+                                <h4 class="font-bold mb-2">Protocolo NTP</h4>
+                                <p class="text-sm text-secondary">Sincronización horaria de alta precisión para el
+                                    registro de telemetría distribuida.</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-xl">
+                                <h4 class="font-bold mb-2">Latencia V2V</h4>
+                                <p class="text-sm text-secondary">Tiempo de respuesta entre unidades validado en <span
+                                        class="text-primary font-bold">&lt; 15ms</span>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-12 pt-8 border-t border-outline-variant flex justify-start items-center">
+                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                            href="#programacion" data-view="programacion">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Anterior: Programación
+                        </a>
+                    </div>
+                </section>
+            </div>
+            <div id="view-galeria" class="view-section hidden px-gutter max-w-container-max-width mx-auto py-12 w-full">
+                <!-- Bento Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- Main Featured Video -->
+                    <div
+                        class="md:col-span-8 group relative overflow-hidden rounded-3xl bg-black aspect-video md:aspect-auto md:h-[500px] shadow-2xl">
+                        <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
+                            data-alt="A cinematic wide shot of a high-tech robotic arm performing precision movements in a sterile, dark laboratory environment. The scene is illuminated by striking red LED light strips that trace the arm's contours, creating a sophisticated and futuristic atmosphere. The background features blurred digital monitors displaying complex GUI control data in a crisp white and deep red color palette. The overall mood is focused, professional, and technologically advanced, echoing a high-end industrial design aesthetic."
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRRoKm5ItcU5oAh60OS9yOmEN2vIaF4EerhCpvxkFVaub_GoWkNmWj5flfoQb3tJmXazjfoz6zP8vxXcIyKSW08hGPKMx3rn8CcnldSs43sA_raLcEeK59I_gxj06Mv6LrFV_6H3Je8peogthjtVhqYdjv0_EsT_LUcGAz1GxzW_8u7NLnDvx3YEgdNNbjAR3tyyxy7GxxTNUIp8FLqBR3vqUZ2411VBLlOO--CJJ3j1eQXDoBD0wIze_2taUeJrv4lyaq4FuS_mZ" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-8 w-full">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span
+                                    class="bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">En
+                                    Vivo</span>
+                                <span class="text-on-primary/70 text-sm flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-sm">schedule</span> 12:45 min
+                                </span>
+                            </div>
+                            <h3 class="text-3xl font-bold text-on-primary mb-2">Control Maestro-Esclavo vía GUI</h3>
+                            <p class="text-on-primary/80 max-w-xl mb-6">Demostración de latencia cero utilizando el
+                                panel de control RÜPÜ v1.2. Interfaz táctil reactiva con retroalimentación haptica.</p>
+                            <button
+                                class="flex items-center gap-2 bg-on-primary text-primary px-6 py-3 rounded-full font-bold hover:bg-primary-container transition-colors active:scale-95">
+                                <span class="material-symbols-outlined"
+                                    style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                                Reproducir Experimento
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Technical Specs Card -->
+                    <div class="md:col-span-4 flex flex-col gap-6">
+                        <div
+                            class="bg-primary p-8 rounded-3xl text-on-primary shadow-xl flex-1 flex flex-col justify-between">
+                            <div>
+                                <span class="material-symbols-outlined text-4xl mb-4">analytics</span>
+                                <h4 class="text-xl font-bold mb-2">Métricas de Repetibilidad</h4>
+                                <p class="text-on-primary/70 text-sm mb-6">Datos consolidados de las últimas 500
+                                    iteraciones de movimiento circular continuo.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-end">
+                                    <span class="text-xs uppercase opacity-60">Desviación Standard</span>
+                                    <span class="text-2xl font-black">0.02mm</span>
+                                </div>
+                                <div class="w-full bg-on-primary/20 h-1.5 rounded-full overflow-hidden">
+                                    <div class="bg-on-primary h-full w-[94%]"></div>
+                                </div>
+                                <div class="flex justify-between items-end">
+                                    <span class="text-xs uppercase opacity-60">Tasa de Éxito</span>
+                                    <span class="text-2xl font-black">99.8%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-6 rounded-3xl shadow-lg border-primary/20">
+                            <h4 class="font-bold text-primary mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined">history</span>
+                                Registros Recientes
+                            </h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3 text-sm">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined">precision_manufacturing</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold">Calibración de Ejes</p>
+                                        <p class="text-xs text-secondary">Hace 2 horas • Finalizado</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                        <span class="material-symbols-outlined">terminal</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="font-semibold">Test de Estrés GUI</p>
+                                        <p class="text-xs text-secondary">Hace 5 horas • Error detectado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid of Secondary Experiments -->
+                    <div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                        <!-- Experiment Card 1 -->
+                        <div
+                            class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+                            <div class="relative h-48 overflow-hidden">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="Detailed close-up of a circuit board and microprocessors with vibrant red glowing accents indicating active data flow. The lighting is dark and moody, focusing on the intricate hardware details. A clean, high-tech aesthetic is achieved through sharp focus and a color palette of deep charcoal, bright whites, and electric red highlights. The style is modern industrial photography used for high-end technology showcases."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdik_LUKy5AY9seXf9zEBOfTJkcnVZDHCeUeQTEU24u3yNdM2MsGXmT1NOz5WpYn44hdAW782SFpJuJHihtxo7NfSIe8STZz9sh0qQ1y3plY_RnB8rUB58_VXPGh5xAE0PkSm7mC_dD2xKew2a2JALHMk4qhjwZm7Fr6lFQ2LGhroTzbBhPyHuoBaZJbrIy-WnMBK17MTRLRYe6NLRm3_WTTJW_Mv2GT7xdIKGyMhWU0fzw8o2393r5Wl43ZsPYg_mu2OEJTqfQ06e" />
+                                <div
+                                    class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
+                                    EXPERIMENTO 08</div>
+                                <div
+                                    class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">
+                                    04:20</div>
+                            </div>
+                            <div class="p-6">
+                                <h5 class="font-bold text-lg mb-2">Sincronización Cinemática</h5>
+                                <p class="text-sm text-secondary mb-4">Validación de algoritmos de cinemática inversa en
+                                    trayectorias no lineales complejos.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-primary">NIVEL: AVANZADO</span>
+                                    <button
+                                        class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                        Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 2 -->
+                        <div
+                            class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+                            <div class="relative h-48 overflow-hidden">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="A sleek workstation featuring a high-resolution curved monitor displaying a sophisticated user interface with red graphs and data visualizations. The desk is minimalist, lit by a soft ambient red glow from behind the screen. The scene conveys a workspace of a professional engineer or designer. The atmosphere is quiet and focused, utilizing a monochromatic scheme with vibrant red as the sole accent color for a premium, modern feel."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJgc58tKkx3q8bI8PR0N38UKIX5AYWO09x6h4YBcagmHEx7vWwZO109XDWS9MgetcSxIQ7LGNG2GclMGku198rGe-8qF8XfbaDfugixGE6Coolx6Q5ukD6jWrPq_rm7GPVdc5nvT7RmBL8QqmmAEIicJSTDSTsR4K71_ms8YFkBzEjLs7EL2Nm5i5qVsEa62gBDHHGnff-2oGo2O2Wul-5YwhUUoSdcvclaDJ1ELxePDcvrdaxI36wsHqIS88wmfv0LPWM59dJXieH" />
+                                <div
+                                    class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
+                                    EXPERIMENTO 12</div>
+                                <div
+                                    class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">
+                                    08:15</div>
+                            </div>
+                            <div class="p-6">
+                                <h5 class="font-bold text-lg mb-2">Optimización de Interfaz</h5>
+                                <p class="text-sm text-secondary mb-4">Mapeo de comandos rápidos y personalización de
+                                    widgets de control en tiempo real.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-primary">NIVEL: INTERMEDIO</span>
+                                    <button
+                                        class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                        Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Experiment Card 3 -->
+                        <div
+                            class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+                            <div class="relative h-48 overflow-hidden">
+                                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                                    data-alt="A clean, minimalist shot of a robotic gripper holding a small, delicate glass object with extreme precision. The background is a bright, high-key white studio setting with soft shadows. Accents of deep red are found in the robot's joints and status lights. The lighting is crisp and clear, highlighting the metallic texture of the robot. The overall feeling is one of sterile precision and advanced engineering achievement in a modern light-mode style."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAawlWKpyF_E2pA8LjORiwFO-_tpCz3_TsNDzFR0x9ZG-A9xDx2zCtaDtof5my2LJMhAx8zibJPKcB2jkJr9ltGW3aPHvny9-_KYyfEMp4vP3EUXEayuq1dbk58epkBnkDQ2mKw1Iptz7tPTyYPhKgygbLCnZBnXWKth3e4IJq_a9M-NT27anlIz--Di82auka1H9xpWsJcUKB7XGyZGKjaAl9CYpYKMq58aFCdbR8S32ev2mHjNlfhk2qJPui1ZBcp-bIl8bVR0w1I" />
+                                <div
+                                    class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">
+                                    EXPERIMENTO 03</div>
+                                <div
+                                    class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">
+                                    03:50</div>
+                            </div>
+                            <div class="p-6">
+                                <h5 class="font-bold text-lg mb-2">Prueba de Carga Dinámica</h5>
+                                <p class="text-sm text-secondary mb-4">Evaluación del torque y estabilidad bajo cargas
+                                    variables en el efector final.</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold text-primary">NIVEL: BÁSICO</span>
+                                    <button
+                                        class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                        Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </main>
+    </div>
+
+    <!-- Logo Modal -->
+    <div id="logo-modal"
+        class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300"
+        onclick="closeLogoModal()">
+        <div class="relative bg-surface-white p-12 rounded-xl shadow-2xl max-w-2xl w-[90%] mx-auto flex items-center justify-center transform scale-95 transition-transform duration-300"
+            onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-secondary hover:text-primary transition-colors"
+                onclick="closeLogoModal()">
+                <span class="material-symbols-outlined text-3xl">close</span>
+            </button>
+            <div id="logo-modal-content" class="text-primary flex flex-col items-center gap-6">
+                <!-- Content will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/router.js"></script>
+    <script src="js/interactions.js"></script>
+</body>
+
+</html>

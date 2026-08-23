@@ -1,0 +1,215 @@
+/* ==========================================================================
+   RÜPÜ Robotics - Solid & Clean Design System (Classic Style)
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: #ffffff;
+    /* Cleaner white background */
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* --- 1. Solid Header --- */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background-color: #ba1a20;
+    z-index: -1;
+}
+
+header {
+    background-color: #ba1a20 !important;
+    /* Solid classic red */
+    border-bottom: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+}
+
+.header-scrolled {
+    background-color: #a0151b !important;
+    /* Slightly darker solid red when scrolling */
+}
+
+/* --- 2. Classic Sidebar --- */
+#app-sidebar {
+    background-color: transparent !important;
+    border-right: 1px solid rgba(186, 26, 32, 0.4) !important;
+}
+
+/* Active Sidebar Item */
+.bg-primary\/10.text-primary.nav-link {
+    background-color: #fff2f0 !important;
+    /* Very subtle pink */
+    border-right: 4px solid #ba1a20 !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    /* Flat edges */
+    color: #ba1a20 !important;
+    font-weight: 700 !important;
+}
+
+.bg-primary\/10.text-primary.nav-link .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1;
+    color: #ba1a20;
+}
+
+/* Inactive Sidebar Item */
+.nav-link {
+    border-right: 4px solid transparent;
+    border-left: none;
+    border-radius: 0 !important;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link:hover {
+    background-color: #f3f3f3;
+    color: #ba1a20;
+}
+
+/* --- 3. Step Numbers & Badges --- */
+/* Ensure the "1", "2" step numbers are solid red squares */
+.bg-surface-variant {
+    background-color: #ba1a20 !important;
+    color: white !important;
+    border-radius: 4px !important;
+    /* Slightly rounded square, not a circle */
+    font-weight: bold;
+}
+
+/* --- 4. Hero Section --- */
+.hero-gradient {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.1) 100%);
+}
+
+/* Buttons */
+.bg-primary {
+    background-color: #ba1a20 !important;
+    color: white !important;
+}
+
+/* Secondary Button (Black with white border) */
+.bg-surface-container {
+    background-color: transparent !important;
+    border: 2px solid white !important;
+    color: white !important;
+}
+
+.bg-surface-container:hover {
+    background-color: white !important;
+    color: black !important;
+}
+
+/* --- 5. Clean Cards --- */
+.glass-card {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    /* Standard rounded corners */
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.glass-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    border-color: #ba1a20;
+}
+
+/* --- 6. View Transitions (SPA) --- */
+.view-section {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Search Bar */
+input[type="text"] {
+    background-color: transparent !important;
+    border-radius: 4px !important;
+    color: white !important;
+}
+
+input[type="text"]::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+input[type="text"]:focus {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* --- 7. Code Blocks (Classic Dark) --- */
+.code-container {
+    background-color: #24292E !important;
+    /* GitHub dark gray */
+    color: #e2e2e2 !important;
+    padding: 1.5rem !important;
+    border-radius: 0.5rem !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    border: none !important;
+}
+
+/* --- 8. Specific Layout Fixes --- */
+.image-paragraph-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .image-paragraph-container {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.active-header-nav span {
+    transform: scaleX(1) !important;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-33.3333%);
+    }
+}
+
+.animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 20s linear infinite;
+}
+
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
