@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" data-lt-installed="true" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calibración de RÜPÜ - Guía Técnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+              "background": "#f9f9f9",
+              "inverse-surface": "#2f3131",
+              "secondary-fixed": "#e5e2e1",
+              "surface": "#f9f9f9",
+              "primary": "#af101a",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#410003",
+              "secondary": "#5f5e5e",
+              "surface-variant": "#e2e2e2",
+              "tertiary-fixed-dim": "#7bd1f8",
+              "on-secondary": "#ffffff",
+              "primary-fixed": "#ffdad6",
+              "on-primary-container": "#fff2f0",
+              "on-tertiary-fixed-variant": "#004d65",
+              "tertiary": "#005f7b",
+              "outline": "#8f6f6c",
+              "github-gray": "#24292E",
+              "primary-container": "#d32f2f",
+              "surface-white": "#FFFFFF",
+              "surface-tint": "#ba1a20",
+              "on-error-container": "#93000a",
+              "surface-dim": "#dadada",
+              "on-surface": "#1a1c1c",
+              "on-secondary-fixed-variant": "#474746",
+              "secondary-container": "#e2dfde",
+              "on-tertiary-container": "#e9f7ff",
+              "surface-container-low": "#f3f3f3",
+              "inverse-on-surface": "#f1f1f1",
+              "primary-fixed-dim": "#ffb3ac",
+              "tertiary-fixed": "#bee9ff",
+              "surface-bright": "#f9f9f9",
+              "surface-container-highest": "#e2e2e2",
+              "surface-container-high": "#e8e8e8",
+              "on-surface-variant": "#5b403d",
+              "on-secondary-fixed": "#1c1b1b",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#930010",
+              "surface-container-lowest": "#ffffff",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-background": "#1a1c1c",
+              "outline-variant": "#e4beba",
+              "surface-container": "#eeeeee",
+              "on-tertiary": "#ffffff",
+              "inverse-primary": "#ffb3ac",
+              "on-secondary-container": "#636262",
+              "on-tertiary-fixed": "#001f2a",
+              "rojito": "#D32F2F",
+              "tertiary-container": "#00799c",
+              "error": "#ba1a1a"
+      },
+      "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+      },
+      "spacing": {
+              "gutter": "24px",
+              "section-padding": "64px",
+              "stack-sm": "8px",
+              "stack-md": "16px",
+              "margin-mobile": "16px",
+              "container-max-width": "1140px",
+              "stack-lg": "32px"
+      },
+      "fontFamily": {
+              "body-lg": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-md": ["Inter"],
+              "label-md": ["JetBrains Mono"]
+      },
+      "fontSize": {
+              "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+              "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+              "headline-lg-mobile": ["32px", {"lineHeight": "38px", "fontWeight": "700"}],
+              "headline-md": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+              "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(211, 47, 47, 0.1);
+        }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: auto;
+        }
+        .code-accent { color: #f44747; }
+        .code-string { color: #ce9178; }
+
+        /* Smart Header Styles */
+        header {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        header.header-hidden {
+            transform: translateY(-100%);
+        }
+        header.header-scrolled {
+            background-color: rgba(175, 16, 26, 0.9) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-rojito/20">
+<header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full max-w-container-max-width mx-auto h-16">
+<div class="flex items-center gap-stack-md">
+<a class="flex items-center hover:opacity-80 transition-opacity" href="sobre_rupu_inicio_final.html"><img alt="RÜPÜ Home" class="h-8 w-auto object-contain border-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo"/></a>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="sobre_rupu_inicio_final.html">Sobre el Proyecto</a>
+<a class="font-body-md text-body-md text-on-primary border-b-2 border-on-primary pb-1 font-bold transition-all duration-200 active:scale-95" href="entorno_de_trabajo_final.html">Documentación</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="galeria_de_demostraciones_final.html">Demostraciones</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32" placeholder="Buscar..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max-width mx-auto min-h-screen pt-16">
+<aside class="hidden md:flex flex-col py-stack-lg gap-stack-md w-64 h-[calc(100vh-64px)] sticky top-16 bg-surface border-r border-outline-variant">
+<div class="px-6 mb-4">
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Guías Técnicas</h2>
+<p class="font-label-md text-label-md text-secondary opacity-70">Documentación v1.0</p>
+</div>
+<nav class="flex flex-col font-label-md text-label-md"><a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="armado_final.html">
+<span class="material-symbols-outlined">build</span> Armado
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="entorno_de_trabajo_final.html">
+<span class="material-symbols-outlined">settings_remote</span> Entorno
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="programacion_y_control_final.html">
+<span class="material-symbols-outlined">code</span> Programación
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all duration-150" href="calibracion_final.html">
+<span class="material-symbols-outlined">tune</span> Calibración
+                </a></nav>
+</aside>
+<main class="flex-1 px-gutter py-stack-lg bg-background w-full"><section class="max-w-4xl">
+<div class="mb-12">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 inline-block">Módulo de Ajuste</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Calibración de RÜPÜ</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">Procedimientos finales para asegurar la precisión de los sensores y la respuesta dinámica del sistema.</p>
+</div>
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">analytics</span>
+1. Calibración de Sensores
+</h2>
+<div class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary text-on-primary">
+<th class="p-4 font-bold text-sm">Sensor</th>
+<th class="p-4 font-bold text-sm">Parámetro</th>
+<th class="p-4 font-bold text-sm">Rango</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="p-4 text-sm">IR QTR-8A</td>
+<td class="p-4 font-mono text-sm">thresh_black</td>
+<td class="p-4 text-sm">600 - 850</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+2. Pruebas de Movimiento
+</h2>
+<div class="glass-card p-6 rounded-xl">
+<p class="text-sm text-secondary mb-4">Ejecute el siguiente script para validar la cinemática inversa y los límites de los actuadores.</p>
+<pre><code><span class="code-accent">void</span> <span class="text-primary-fixed-dim">testKinematics</span>() {
+  <span class="code-string">// Mover a posición neutral</span>
+  robot.moveTo(<span class="text-outline-variant">0, 0, 100</span>);
+  delay(<span class="text-outline-variant">1000</span>);
+  <span class="code-string">// Validar límites de torque</span>
+  <span class="code-accent">if</span> (robot.checkTorque() &gt; <span class="text-outline-variant">MAX_LIMIT</span>) {
+    Serial.println(<span class="code-string">"Error: Calibración requerida"</span>);
+  }
+}</code></pre>
+</div>
+</div>
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">sync_alt</span>
+3. Sincronización de Red
+</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass-card p-6 rounded-xl">
+<h4 class="font-bold mb-2">Protocolo NTP</h4>
+<p class="text-sm text-secondary">Sincronización horaria de alta precisión para el registro de telemetría distribuida.</p>
+</div>
+<div class="glass-card p-6 rounded-xl">
+<h4 class="font-bold mb-2">Latencia V2V</h4>
+<p class="text-sm text-secondary">Tiempo de respuesta entre unidades validado en <span class="text-primary font-bold">&lt; 15ms</span>.</p>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant flex justify-between items-center">
+<a class="flex items-center gap-2 text-secondary hover:text-primary transition-colors" href="programacion_y_control_final.html">
+<span class="material-symbols-outlined">arrow_back</span>
+Anterior: Programación
+</a>
+<a class="bg-primary text-on-primary px-8 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all" href="sobre_rupu_inicio_final.html">
+Finalizar Guía
+<span class="material-symbols-outlined">check_circle</span>
+</a>
+</div>
+</section></main>
+</div>
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant full-width">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
+<div class="mb-4 md:mb-0">
+<div class="font-headline-md text-headline-md text-surface-white font-bold text-white mb-2">RÜPÜ</div>
+<p class="font-label-md text-label-md text-secondary-fixed">© 2024 RÜPÜ Robotics System. Todos los derechos reservados.</p>
+</div>
+<div class="flex gap-8 font-label-md text-label-md">
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Repositorio GitHub</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Licencia MIT</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Contacto</a>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        const headerContainer = document.getElementById('header-container');
+        
+        let lastScrollY = window.scrollY;
+        let scrollThreshold = 10;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY;
+            
+            if (currentScrollY <= 0) {
+                header.classList.remove('header-hidden', 'header-scrolled');
+                headerContainer.classList.remove('h-14');
+                headerContainer.classList.add('h-16');
+            } else {
+                if (scrollDelta > scrollThreshold) {
+                    header.classList.add('header-hidden');
+                } else if (scrollDelta < -scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                    header.classList.add('header-scrolled');
+                    headerContainer.classList.remove('h-16');
+                    headerContainer.classList.add('h-14');
+                }
+            }
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+
+        // Simple micro-interaction for sequential steps appearance
+        const steps = document.querySelectorAll('.relative.group');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('opacity-100');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        steps.forEach(step => {
+            step.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700');
+            observer.observe(step);
+        });
+    });
+</script>
+</body></html>

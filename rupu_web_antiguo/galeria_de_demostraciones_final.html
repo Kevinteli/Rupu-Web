@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RÜPÜ Robotics - Galería de Demostraciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-fixed": "#001f2a",
+                "on-secondary-fixed-variant": "#474746",
+                "outline": "#8f6f6c",
+                "on-secondary": "#ffffff",
+                "secondary-container": "#e2dfde",
+                "secondary": "#5f5e5e",
+                "background": "#f9f9f9",
+                "tertiary": "#005f7b",
+                "surface-dim": "#dadada",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-container": "#e9f7ff",
+                "surface-white": "#FFFFFF",
+                "surface-bright": "#f9f9f9",
+                "surface-container-low": "#f3f3f3",
+                "on-error": "#ffffff",
+                "on-background": "#1a1c1c",
+                "on-primary-fixed-variant": "#930010",
+                "error-container": "#ffdad6",
+                "tertiary-fixed": "#bee9ff",
+                "surface-container-highest": "#e2e2e2",
+                "on-error-container": "#93000a",
+                "on-primary-container": "#fff2f0",
+                "on-surface-variant": "#5b403d",
+                "inverse-on-surface": "#f1f1f1",
+                "error": "#ba1a1a",
+                "surface-tint": "#ba1a20",
+                "surface": "#f9f9f9",
+                "on-secondary-container": "#636262",
+                "rojito": "#D32F2F",
+                "primary-fixed": "#ffdad6",
+                "outline-variant": "#e4beba",
+                "inverse-surface": "#2f3131",
+                "on-surface": "#1a1c1c",
+                "secondary-fixed-dim": "#c8c6c5",
+                "primary-container": "#d32f2f",
+                "on-secondary-fixed": "#1c1b1b",
+                "secondary-fixed": "#e5e2e1",
+                "surface-container": "#eeeeee",
+                "on-tertiary-fixed-variant": "#004d65",
+                "on-primary-fixed": "#410003",
+                "surface-variant": "#e2e2e2",
+                "surface-container-lowest": "#ffffff",
+                "github-gray": "#24292E",
+                "inverse-primary": "#ffb3ac",
+                "primary-fixed-dim": "#ffb3ac",
+                "surface-container-high": "#e8e8e8",
+                "tertiary-container": "#00799c",
+                "tertiary-fixed-dim": "#7bd1f8",
+                "on-primary": "#ffffff",
+                "primary": "#af101a"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "spacing": {
+                "stack-sm": "8px",
+                "stack-lg": "32px",
+                "margin-mobile": "16px",
+                "container-max-width": "1140px",
+                "stack-md": "16px",
+                "gutter": "24px",
+                "section-padding": "64px"
+        },
+        "fontFamily": {
+                "label-md": [
+                        "JetBrains Mono"
+                ],
+                "headline-md": [
+                        "Hanken Grotesk"
+                ],
+                "headline-lg": [
+                        "Hanken Grotesk"
+                ],
+                "body-md": [
+                        "Inter"
+                ],
+                "code-sm": [
+                        "JetBrains Mono"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "headline-lg-mobile": [
+                        "Hanken Grotesk"
+                ]
+        },
+        "fontSize": {
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "500"
+                        }
+                ],
+                "headline-md": [
+                        "28px",
+                        {
+                                "lineHeight": "34px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "40px",
+                        {
+                                "lineHeight": "48px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "code-sm": [
+                        "13px",
+                        {
+                                "lineHeight": "18px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "38px",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(211, 47, 47, 0.1);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Smart Header Styles */
+        header {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease;
+        }
+        header.header-hidden {
+            transform: translateY(-100%);
+        }
+        header.header-scrolled {
+            background-color: rgba(175, 16, 26, 0.9) !important; /* bg-primary/90 */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+<!-- TopNavBar -->
+<header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full max-w-container-max-width mx-auto h-16">
+<div class="flex items-center gap-stack-md">
+<a class="flex items-center hover:opacity-80 transition-opacity" href="sobre_rupu_inicio_final.html"><img alt="RÜPÜ Home" class="h-8 w-auto object-contain border-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo"/></a>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="sobre_rupu_inicio_final.html">Sobre el Proyecto</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="entorno_de_trabajo_final.html">Documentación</a>
+<a class="font-body-md text-body-md text-on-primary border-b-2 border-on-primary pb-1 font-bold transition-all duration-200 active:scale-95" href="galeria_de_demostraciones_final.html">Demostraciones</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32" placeholder="Buscar..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+</div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col py-8 gap-6 h-[calc(100vh-64px)] w-64 left-0 top-16 fixed bg-surface border-r border-outline-variant">
+<div class="px-6">
+<h2 class="font-headline-md text-xl text-primary font-bold">Guías Técnicas</h2>
+<p class="text-xs text-secondary opacity-70">Documentación v1.0</p>
+</div>
+<div class="flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:text-primary hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-sm" href="armado_final.html">
+<span class="material-symbols-outlined">build</span>
+<span>Armado</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:text-primary hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-sm" href="entorno_de_trabajo_final.html">
+<span class="material-symbols-outlined">settings_remote</span>
+<span>Entorno</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-colors rounded-l-lg font-label-md text-sm" href="programacion_y_control_final.html">
+<span class="material-symbols-outlined">code</span>
+<span>Programación</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-secondary hover:text-primary hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-sm" href="calibracion_final.html">
+<span class="material-symbols-outlined">tune</span>
+<span>Calibración</span>
+</a>
+</div>
+<div class="mt-auto px-6">
+<div class="p-4 bg-primary-container/30 rounded-xl border border-primary/10">
+<p class="text-xs font-bold text-primary mb-1 uppercase tracking-wider">Estado del Sistema</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+<span class="text-xs text-on-surface/70">Motores Online</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 p-6 md:p-10 max-w-7xl">
+<header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full max-w-container-max-width mx-auto h-16">
+<div class="flex items-center gap-stack-md">
+<a class="flex items-center hover:opacity-80 transition-opacity" href="sobre_rupu_inicio_final.html"><img alt="RÜPÜ Home" class="h-8 w-auto object-contain border-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo"/></a>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="sobre_rupu_inicio_final.html">Sobre el Proyecto</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="entorno_de_trabajo_final.html">Documentación</a>
+<a class="font-body-md text-body-md text-on-primary border-b-2 border-on-primary pb-1 font-bold transition-all duration-200 active:scale-95" href="galeria_de_demostraciones_final.html">Demostraciones</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32" placeholder="Buscar..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main Featured Video -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-3xl bg-black aspect-video md:aspect-auto md:h-[500px] shadow-2xl">
+<img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic wide shot of a high-tech robotic arm performing precision movements in a sterile, dark laboratory environment. The scene is illuminated by striking red LED light strips that trace the arm's contours, creating a sophisticated and futuristic atmosphere. The background features blurred digital monitors displaying complex GUI control data in a crisp white and deep red color palette. The overall mood is focused, professional, and technologically advanced, echoing a high-end industrial design aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRRoKm5ItcU5oAh60OS9yOmEN2vIaF4EerhCpvxkFVaub_GoWkNmWj5flfoQb3tJmXazjfoz6zP8vxXcIyKSW08hGPKMx3rn8CcnldSs43sA_raLcEeK59I_gxj06Mv6LrFV_6H3Je8peogthjtVhqYdjv0_EsT_LUcGAz1GxzW_8u7NLnDvx3YEgdNNbjAR3tyyxy7GxxTNUIp8FLqBR3vqUZ2411VBLlOO--CJJ3j1eQXDoBD0wIze_2taUeJrv4lyaq4FuS_mZ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8 w-full">
+<div class="flex items-center gap-3 mb-3">
+<span class="bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">En Vivo</span>
+<span class="text-on-primary/70 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> 12:45 min
+                            </span>
+</div>
+<h3 class="text-3xl font-bold text-on-primary mb-2">Control Maestro-Esclavo vía GUI</h3>
+<p class="text-on-primary/80 max-w-xl mb-6">Demostración de latencia cero utilizando el panel de control RÜPÜ v1.2. Interfaz táctil reactiva con retroalimentación haptica.</p>
+<button class="flex items-center gap-2 bg-on-primary text-primary px-6 py-3 rounded-full font-bold hover:bg-primary-container transition-colors active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            Reproducir Experimento
+                        </button>
+</div>
+</div>
+<!-- Technical Specs Card -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="bg-primary p-8 rounded-3xl text-on-primary shadow-xl flex-1 flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-4xl mb-4">analytics</span>
+<h4 class="text-xl font-bold mb-2">Métricas de Repetibilidad</h4>
+<p class="text-on-primary/70 text-sm mb-6">Datos consolidados de las últimas 500 iteraciones de movimiento circular continuo.</p>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<span class="text-xs uppercase opacity-60">Desviación Standard</span>
+<span class="text-2xl font-black">0.02mm</span>
+</div>
+<div class="w-full bg-on-primary/20 h-1.5 rounded-full overflow-hidden">
+<div class="bg-on-primary h-full w-[94%]"></div>
+</div>
+<div class="flex justify-between items-end">
+<span class="text-xs uppercase opacity-60">Tasa de Éxito</span>
+<span class="text-2xl font-black">99.8%</span>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-3xl shadow-lg border-primary/20">
+<h4 class="font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">history</span>
+                            Registros Recientes
+                        </h4>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Calibración de Ejes</p>
+<p class="text-xs text-secondary">Hace 2 horas • Finalizado</p>
+</div>
+</div>
+<div class="flex items-center gap-3 text-sm">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">terminal</span>
+</div>
+<div class="flex-1">
+<p class="font-semibold">Test de Estrés GUI</p>
+<p class="text-xs text-secondary">Hace 5 horas • Error detectado</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Grid of Secondary Experiments -->
+<div class="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+<!-- Experiment Card 1 -->
+<div class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Detailed close-up of a circuit board and microprocessors with vibrant red glowing accents indicating active data flow. The lighting is dark and moody, focusing on the intricate hardware details. A clean, high-tech aesthetic is achieved through sharp focus and a color palette of deep charcoal, bright whites, and electric red highlights. The style is modern industrial photography used for high-end technology showcases." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdik_LUKy5AY9seXf9zEBOfTJkcnVZDHCeUeQTEU24u3yNdM2MsGXmT1NOz5WpYn44hdAW782SFpJuJHihtxo7NfSIe8STZz9sh0qQ1y3plY_RnB8rUB58_VXPGh5xAE0PkSm7mC_dD2xKew2a2JALHMk4qhjwZm7Fr6lFQ2LGhroTzbBhPyHuoBaZJbrIy-WnMBK17MTRLRYe6NLRm3_WTTJW_Mv2GT7xdIKGyMhWU0fzw8o2393r5Wl43ZsPYg_mu2OEJTqfQ06e"/>
+<div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">EXPERIMENTO 08</div>
+<div class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">04:20</div>
+</div>
+<div class="p-6">
+<h5 class="font-bold text-lg mb-2">Sincronización Cinemática</h5>
+<p class="text-sm text-secondary mb-4">Validación de algoritmos de cinemática inversa en trayectorias no lineales complejos.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-primary">NIVEL: AVANZADO</span>
+<button class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                    Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Experiment Card 2 -->
+<div class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A sleek workstation featuring a high-resolution curved monitor displaying a sophisticated user interface with red graphs and data visualizations. The desk is minimalist, lit by a soft ambient red glow from behind the screen. The scene conveys a workspace of a professional engineer or designer. The atmosphere is quiet and focused, utilizing a monochromatic scheme with vibrant red as the sole accent color for a premium, modern feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJgc58tKkx3q8bI8PR0N38UKIX5AYWO09x6h4YBcagmHEx7vWwZO109XDWS9MgetcSxIQ7LGNG2GclMGku198rGe-8qF8XfbaDfugixGE6Coolx6Q5ukD6jWrPq_rm7GPVdc5nvT7RmBL8QqmmAEIicJSTDSTsR4K71_ms8YFkBzEjLs7EL2Nm5i5qVsEa62gBDHHGnff-2oGo2O2Wul-5YwhUUoSdcvclaDJ1ELxePDcvrdaxI36wsHqIS88wmfv0LPWM59dJXieH"/>
+<div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">EXPERIMENTO 12</div>
+<div class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">08:15</div>
+</div>
+<div class="p-6">
+<h5 class="font-bold text-lg mb-2">Optimización de Interfaz</h5>
+<p class="text-sm text-secondary mb-4">Mapeo de comandos rápidos y personalización de widgets de control en tiempo real.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-primary">NIVEL: INTERMEDIO</span>
+<button class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                    Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Experiment Card 3 -->
+<div class="group bg-surface-container rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-transparent hover:border-primary/20">
+<div class="relative h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A clean, minimalist shot of a robotic gripper holding a small, delicate glass object with extreme precision. The background is a bright, high-key white studio setting with soft shadows. Accents of deep red are found in the robot's joints and status lights. The lighting is crisp and clear, highlighting the metallic texture of the robot. The overall feeling is one of sterile precision and advanced engineering achievement in a modern light-mode style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAawlWKpyF_E2pA8LjORiwFO-_tpCz3_TsNDzFR0x9ZG-A9xDx2zCtaDtof5my2LJMhAx8zibJPKcB2jkJr9ltGW3aPHvny9-_KYyfEMp4vP3EUXEayuq1dbk58epkBnkDQ2mKw1Iptz7tPTyYPhKgygbLCnZBnXWKth3e4IJq_a9M-NT27anlIz--Di82auka1H9xpWsJcUKB7XGyZGKjaAl9CYpYKMq58aFCdbR8S32ev2mHjNlfhk2qJPui1ZBcp-bIl8bVR0w1I"/>
+<div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded">EXPERIMENTO 03</div>
+<div class="absolute bottom-3 right-3 bg-primary text-on-primary text-xs font-bold px-2 py-1 rounded-full">03:50</div>
+</div>
+<div class="p-6">
+<h5 class="font-bold text-lg mb-2">Prueba de Carga Dinámica</h5>
+<p class="text-sm text-secondary mb-4">Evaluación del torque y estabilidad bajo cargas variables en el efector final.</p>
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold text-primary">NIVEL: BÁSICO</span>
+<button class="text-primary hover:underline font-bold text-sm flex items-center gap-1">
+                                    Detalles <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main>
+</div>
+<!-- Footer -->
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-6 py-10 w-full max-w-7xl mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-md text-2xl font-bold text-surface-white mb-2">RÜPÜ</span>
+<p class="font-label-md text-label-md text-secondary-fixed text-center md:text-left max-w-xs">
+                    Plataforma abierta para la experimentación en robótica de precision y control embebido.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-secondary-fixed hover:text-surface-white transition-colors font-label-md text-sm" href="#">Repositorio GitHub</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors font-label-md text-sm" href="#">Licencia MIT</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors font-label-md text-sm" href="#">Contacto</a>
+</div>
+<p class="font-label-md text-xs text-secondary-fixed/60 text-center md:text-right">
+                © 2024 RÜPÜ Robotics System. Todos los derechos reservados.
+            </p>
+</div>
+</footer>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.group').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding haptic-like visual feedback or sound
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.classList.add('w-64');
+        });
+        searchInput.addEventListener('blur', () => {
+            if (searchInput.value === '') {
+                searchInput.classList.remove('w-64');
+            }
+        });
+
+        // Smart Header Interaction
+        const header = document.querySelector('header');
+        let lastScrollY = window.scrollY;
+        let scrollThreshold = 10;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY;
+            
+            if (currentScrollY <= 0) {
+                header.classList.remove('header-hidden');
+                header.classList.remove('header-scrolled');
+                header.classList.remove('h-14');
+                header.classList.add('h-16');
+            } else {
+                if (scrollDelta > scrollThreshold) {
+                    header.classList.add('header-hidden');
+                } else if (scrollDelta < -scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                    header.classList.add('header-scrolled');
+                    header.classList.remove('h-16');
+                    header.classList.add('h-14');
+                }
+            }
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+    </script>
+```</body></html>

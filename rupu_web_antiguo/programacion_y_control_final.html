@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="light" data-lt-installed="true" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Programación y Control - Guía Técnica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&amp;display=block" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+              "background": "#f9f9f9",
+              "inverse-surface": "#2f3131",
+              "secondary-fixed": "#e5e2e1",
+              "surface": "#f9f9f9",
+              "primary": "#af101a",
+              "on-primary": "#ffffff",
+              "on-primary-fixed": "#410003",
+              "secondary": "#5f5e5e",
+              "surface-variant": "#e2e2e2",
+              "tertiary-fixed-dim": "#7bd1f8",
+              "on-secondary": "#ffffff",
+              "primary-fixed": "#ffdad6",
+              "on-primary-container": "#fff2f0",
+              "on-tertiary-fixed-variant": "#004d65",
+              "tertiary": "#005f7b",
+              "outline": "#8f6f6c",
+              "github-gray": "#24292E",
+              "primary-container": "#d32f2f",
+              "surface-white": "#FFFFFF",
+              "surface-tint": "#ba1a20",
+              "on-error-container": "#93000a",
+              "surface-dim": "#dadada",
+              "on-surface": "#1a1c1c",
+              "on-secondary-fixed-variant": "#474746",
+              "secondary-container": "#e2dfde",
+              "on-tertiary-container": "#e9f7ff",
+              "surface-container-low": "#f3f3f3",
+              "inverse-on-surface": "#f1f1f1",
+              "primary-fixed-dim": "#ffb3ac",
+              "tertiary-fixed": "#bee9ff",
+              "surface-bright": "#f9f9f9",
+              "surface-container-highest": "#e2e2e2",
+              "surface-container-high": "#e8e8e8",
+              "on-surface-variant": "#5b403d",
+              "on-secondary-fixed": "#1c1b1b",
+              "error-container": "#ffdad6",
+              "on-primary-fixed-variant": "#930010",
+              "surface-container-lowest": "#ffffff",
+              "on-error": "#ffffff",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-background": "#1a1c1c",
+              "outline-variant": "#e4beba",
+              "surface-container": "#eeeeee",
+              "on-tertiary": "#ffffff",
+              "inverse-primary": "#ffb3ac",
+              "on-secondary-container": "#636262",
+              "on-tertiary-fixed": "#001f2a",
+              "rojito": "#D32F2F",
+              "tertiary-container": "#00799c",
+              "error": "#ba1a1a"
+      },
+      "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+      },
+      "spacing": {
+              "gutter": "24px",
+              "section-padding": "64px",
+              "stack-sm": "8px",
+              "stack-md": "16px",
+              "margin-mobile": "16px",
+              "container-max-width": "1140px",
+              "stack-lg": "32px"
+      },
+      "fontFamily": {
+              "body-lg": ["Inter"],
+              "code-sm": ["JetBrains Mono"],
+              "headline-lg-mobile": ["Hanken Grotesk"],
+              "headline-md": ["Hanken Grotesk"],
+              "headline-lg": ["Hanken Grotesk"],
+              "body-md": ["Inter"],
+              "label-md": ["JetBrains Mono"]
+      },
+      "fontSize": {
+              "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+              "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+              "headline-lg-mobile": ["32px", {"lineHeight": "38px", "fontWeight": "700"}],
+              "headline-md": ["28px", {"lineHeight": "34px", "fontWeight": "600"}],
+              "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+              "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+              "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(211, 47, 47, 0.1);
+        }
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            overflow-x: auto;
+        }
+        .code-accent { color: #f44747; }
+        .code-string { color: #ce9178; }
+
+        /* Smart Header Styles */
+        header {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease, backdrop-filter 0.3s ease;
+        }
+        header.header-hidden {
+            transform: translateY(-100%);
+        }
+        header.header-scrolled {
+            background-color: rgba(175, 16, 26, 0.9) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-rojito/20">
+<header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50">
+<div class="flex justify-between items-center px-gutter w-full max-w-container-max-width mx-auto h-16">
+<div class="flex items-center gap-stack-md">
+<a class="flex items-center hover:opacity-80 transition-opacity" href="sobre_rupu_inicio_final.html"><img alt="RÜPÜ Home" class="h-8 w-auto object-contain border-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo"/></a>
+</div>
+<nav class="hidden md:flex items-center gap-stack-lg">
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="sobre_rupu_inicio_final.html">Sobre el Proyecto</a>
+<a class="font-body-md text-body-md text-on-primary border-b-2 border-on-primary pb-1 font-bold transition-all duration-200 active:scale-95" href="entorno_de_trabajo_final.html">Documentación</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:text-on-primary transition-all duration-200 active:scale-95" href="galeria_de_demostraciones_final.html">Demostraciones</a>
+</nav>
+<div class="flex items-center gap-stack-md">
+<div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32" placeholder="Buscar..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max-width mx-auto min-h-screen pt-16">
+<aside class="hidden md:flex flex-col py-stack-lg gap-stack-md w-64 h-[calc(100vh-64px)] sticky top-16 bg-surface border-r border-outline-variant">
+<div class="px-6 mb-4">
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Guías Técnicas</h2>
+<p class="font-label-md text-label-md text-secondary opacity-70">Documentación v1.0</p>
+</div>
+<nav class="flex flex-col font-label-md text-label-md">
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="armado_final.html">
+<span class="material-symbols-outlined">build</span> Armado
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="entorno_de_trabajo_final.html">
+<span class="material-symbols-outlined">settings_remote</span> Entorno
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-primary font-bold border-r-2 border-primary bg-primary-container/10 transition-all duration-150" href="programacion_y_control_final.html">
+<span class="material-symbols-outlined">code</span> Programación
+                </a>
+<a class="flex items-center gap-3 px-6 py-3 text-secondary hover:text-primary hover:bg-surface-container-high transition-all duration-150" href="calibracion_final.html">
+<span class="material-symbols-outlined">tune</span> Calibración
+                </a>
+</nav>
+</aside>
+<main class="flex-1 px-gutter py-stack-lg bg-background w-full">
+<section class="max-w-4xl">
+<div class="mb-12">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase mb-4 inline-block">Módulo Avanzado</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-surface mb-4 leading-tight">Programación y Control</h1>
+<p class="font-body-lg text-body-lg text-secondary max-w-2xl">Configuración de red descentralizada y flujos de trabajo secuenciales para el control del sistema robótico RÜPÜ.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+<div class="glass-card p-6 rounded-xl">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">hub</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Topología Leader/Follower</h3>
+</div>
+<p class="text-sm text-secondary mb-4">El sistema utiliza una arquitectura de red donde una unidad central coordina las peticiones mientras los periféricos ejecutan tareas locales de baja latencia.</p>
+<div class="p-4 bg-surface-container rounded-lg">
+<div class="flex justify-between text-xs font-bold mb-2">
+<span class="">LEADER</span>
+<span class="text-primary">ACTIVO</span>
+</div>
+<div class="h-2 w-full bg-outline-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-full animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="glass-card p-6 rounded-xl overflow-hidden relative group transition-all duration-700">
+<img class="absolute inset-0 w-full h-full object-cover opacity-10 group-hover:scale-105 transition-transform duration-700" data-alt="A clean, futuristic schematic showing a network topology with glowing nodes connected by crimson red lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9VjJ0Bq9B3B8Uv31vh6PuDXOSiYg2OKZicUT3ruXRN2Mm1sp8Yo9mO8Y8xSAYCcxcdK1uhRsgJGHxahlboLSQgpLUXkQALzAKmOytOdOF9p4OvyvlsCtxYRPaBQkgp9Iy2i5TmUFbR4eSIXPuMH7ePzVz14HFPCHC78GAgs21PmaxHoo45630RS-w8eZB8YTQFaYxI2E98bIV97h4lscCoJIQI5CYSNqhSnrEs928YU74Aq0jJjrFKhA_pVPxRAovt5F0KJeJf4fC"/>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">terminal</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Monitoreo de IP</h3>
+</div>
+<p class="text-sm text-secondary mb-4">Verifique la conectividad y asigne direcciones estáticas para evitar colisiones en el segmento de red.</p>
+<code class="block bg-on-surface text-surface px-4 py-2 rounded text-xs font-mono">
+<span class="text-primary-fixed-dim">$</span> ipconfig <span class="text-outline-variant">/</span> ip a
+                            </code>
+</div>
+</div>
+</div>
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">map</span>
+                        Mapping de Dispositivos
+                    </h2>
+<div class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary text-on-primary">
+<th class="p-4 font-bold text-sm">ID Robot</th>
+<th class="p-4 font-bold text-sm">Rol Designado</th>
+<th class="p-4 font-bold text-sm">Rango IP</th>
+<th class="p-4 font-bold text-sm">Protocolo</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="p-4 font-mono text-sm">RP-01-L</td>
+<td class="p-4 text-sm font-semibold">Master Leader</td>
+<td class="p-4 text-sm">192.168.1.10</td>
+<td class="p-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">TCP/IP</span></td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="p-4 font-mono text-sm">RP-02-F</td>
+<td class="p-4 text-sm">Follower A</td>
+<td class="p-4 text-sm">192.168.1.11</td>
+<td class="p-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">UDP</span></td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="p-4 font-mono text-sm">RP-03-F</td>
+<td class="p-4 text-sm">Follower B</td>
+<td class="p-4 text-sm">192.168.1.12</td>
+<td class="p-4"><span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-xs">UDP</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="mb-12">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-8">Flujo de Carga Secuencial</h2>
+<div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-primary/20 before:via-primary before:to-primary/20">
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">1</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+<h4 class="font-bold mb-2">Inicialización de Kernel</h4>
+<p class="text-sm text-secondary">Carga los drivers base y el sistema de gestión de memoria del robot.</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">2</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+<h4 class="font-bold mb-2">Handshake de Red</h4>
+<p class="text-sm text-secondary">Sincronización de reloj maestro y validación de IPs según la tabla de mapping.</p>
+</div>
+</div>
+<div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group transition-all duration-700 opacity-100">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border border-primary bg-surface text-primary font-bold shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-transform group-hover:scale-110">3</div>
+<div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-6 rounded-xl glass-card">
+<h4 class="font-bold mb-2">Inyección de Script</h4>
+<p class="text-sm text-secondary">Despliegue de binarios .hex o scripts .py en la memoria flash de cada unidad.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-inverse-surface rounded-2xl p-8 text-surface shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">gamepad</span>
+</div>
+<div class="relative z-10">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">dashboard</span>
+                            Instrucciones de la GUI
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="border-l-2 border-primary-fixed-dim pl-4">
+<span class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso 1</span>
+<p class="mt-2 text-sm text-on-inverse-surface">Abra <code class="bg-white/10 px-1 rounded">RupuControl.exe</code> y seleccione el puerto serial COM correspondiente.</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim pl-4">
+<span class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso 2</span>
+<p class="mt-2 text-sm text-on-inverse-surface">Haga clic en 'Scan Network' para detectar todos los robots Follower en línea.</p>
+</div>
+<div class="border-l-2 border-primary-fixed-dim pl-4">
+<span class="text-xs uppercase tracking-widest text-primary-fixed-dim font-bold">Paso 3</span>
+<p class="mt-2 text-sm text-on-inverse-surface">Use el Joystick virtual o los comandos de consola para enviar macros en tiempo real.</p>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-white/10 flex flex-wrap gap-4">
+<a class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all" href="#">
+<span class="material-symbols-outlined">download</span>
+                                Descargar GUI
+                            </a>
+<button class="bg-white/10 text-on-primary border border-white/20 px-6 py-3 rounded-lg font-bold flex items-center gap-2 hover:bg-white/20 active:scale-95 transition-all">
+<span class="material-symbols-outlined">description</span>
+                                Ver API Docs
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant full-width">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
+<div class="mb-4 md:mb-0">
+<div class="font-headline-md text-headline-md text-surface-white font-bold text-white mb-2">RÜPÜ</div>
+<p class="font-label-md text-label-md text-secondary-fixed">© 2024 RÜPÜ Robotics System. Todos los derechos reservados.</p>
+</div>
+<div class="flex gap-8 font-label-md text-label-md">
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Repositorio GitHub</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Licencia MIT</a>
+<a class="text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80" href="#">Contacto</a>
+</div>
+</div>
+</footer>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const header = document.querySelector('header');
+        const headerContainer = document.getElementById('header-container');
+        
+        let lastScrollY = window.scrollY;
+        let scrollThreshold = 10;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const scrollDelta = currentScrollY - lastScrollY;
+            
+            if (currentScrollY <= 0) {
+                header.classList.remove('header-hidden', 'header-scrolled');
+                headerContainer.classList.remove('h-14');
+                headerContainer.classList.add('h-16');
+            } else {
+                if (scrollDelta > scrollThreshold) {
+                    header.classList.add('header-hidden');
+                } else if (scrollDelta < -scrollThreshold) {
+                    header.classList.remove('header-hidden');
+                    header.classList.add('header-scrolled');
+                    headerContainer.classList.remove('h-16');
+                    headerContainer.classList.add('h-14');
+                }
+            }
+            lastScrollY = currentScrollY;
+        }, { passive: true });
+
+        // Simple micro-interaction for sequential steps appearance
+        const steps = document.querySelectorAll('.relative.group');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('opacity-100');
+                        entry.target.classList.remove('opacity-0', 'translate-y-4');
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        steps.forEach(step => {
+            step.classList.add('opacity-0', 'translate-y-4', 'transition-all', 'duration-700');
+            observer.observe(step);
+        });
+    });
+</script>
+</body></html>
