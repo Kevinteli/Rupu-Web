@@ -18,7 +18,7 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="js/tailwind-config.js"></script>
     <link rel="stylesheet" href="css/main.css">
-    
+
     <!-- 3D Model Viewer (Google) -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 </head>
@@ -31,7 +31,7 @@
             <div class="flex items-center gap-8">
                 <a id="nav-logo" class="flex items-center hover:opacity-80 transition-opacity spa-link" href="#inicio"
                     data-view="inicio"><img alt="RÜPÜ Home" class="h-12 w-auto object-contain border-none"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHczBxVjA9BsKR09MUJf3kyyR4Z_uhz6s1F5BAgpW0c-Y9tnKiCfmVCv06HLFWXBRrHLRuFHQge-JDDMvPWmZPmHFN6SWqCfAeJTHp-ddC0j5pyrzFtpwhbbSRgi52v3f0S-3Adm8M0NkDaqkleCthW37gj-YIBdzMXUk_x7RrZ53GYMX8l8C4t3WadS9JCxrCbwFSEtvwqZZz-yi0NVX9cfPkw-7nyM9OSHb73midhD6Q0xWpMEmI1e3QT38Y-JQgBtnFihseKt7RwRo" /></a>
+                        src="assets/img/logo_rupu.png" /></a>
             </div>
             <nav class="hidden md:flex items-center gap-8">
                 <a id="nav-inicio"
@@ -123,15 +123,15 @@
                             class="relative z-10 w-full max-w-container-max-width mx-auto px-gutter grid grid-cols-12 gap-gutter">
                             <div class="col-span-12 md:col-span-10 lg:col-span-8 flex flex-col gap-stack-lg">
                                 <h1 class="flex flex-col"><span
-                                        class="text-[#d32f2f] font-headline-lg text-headline-lg uppercase tracking-tight mb-2">TRANSFORMANDO
-                                        EXPERIENCIAS</span><span
+                                        class="text-[#d32f2f] font-headline-lg text-headline-lg uppercase tracking-tight mb-2">ROBÓTICA
+                                        COOPERATIVA</span><span
                                         class="text-white font-headline-lg text-headline-lg uppercase tracking-tight leading-tight">PLATAFORMA
                                         PARA EL ESTUDIO DE PLATOONING</span></h1>
                                 <p
                                     class="text-secondary-fixed text-body-lg font-body-lg max-w-2xl leading-relaxed mt-4">
-                                    RÜPÜ ofrece a la comunidad académica un ecosistema diverso de soluciones para
-                                    enriquecer experiencias de laboratorio prácticas y permitir una investigación de
-                                    ingeniería eficiente en control distribuido multivariable.</p>
+                                    RUPU es una plataforma experimental de bajo costo diseñada para el estudio del
+                                    control de flotas de robots móviles y problemas de line-following platooning.
+                                    Integrando cómputo, sensado local y comunicación inalámbrica.</p>
                                 <div class="flex flex-wrap gap-stack-md mt-stack-md"><a
                                         class="bg-[#d32f2f] text-white px-8 py-4 font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-[#d32f2f] transition-all duration-300 inline-block spa-link"
                                         href="#" data-view="entorno">Explorar Guía Técnica</a><a
@@ -157,6 +157,69 @@
                             </div>
                         </div>
                     </section>
+                    </section>
+
+                    <!-- Contexto Nuevos Participantes -->
+                    <section
+                        class="bg-surface-container-lowest py-section-padding border-b border-outline-variant relative overflow-hidden">
+                        <div
+                            class="absolute right-0 top-0 w-1/3 h-full bg-rojito/5 -skew-x-12 transform origin-top hidden md:block">
+                        </div>
+                        <div class="max-w-container-max-width mx-auto px-gutter relative z-10">
+                            <div class="grid md:grid-cols-2 gap-12 items-center">
+                                <div>
+                                    <div
+                                        class="inline-flex items-center gap-2 px-3 py-1 bg-rojito/10 text-rojito rounded-full mb-6">
+                                        <span class="material-symbols-outlined text-sm">school</span>
+                                        <span class="text-xs font-bold uppercase tracking-widest">Para Nuevos
+                                            Integrantes</span>
+                                    </div>
+                                    <h2
+                                        class="font-headline-lg text-4xl text-on-surface mb-6 font-extrabold leading-tight">
+                                        ¿Qué es el proyecto RUPU?</h2>
+                                    <p class="text-secondary font-body-lg leading-relaxed mb-6">
+                                        Nacida en la <strong>UTFSM (2021)</strong>, RUPU fue concebida desde su origen
+                                        para el estudio del <strong>control de flotas y pelotones de vehículos</strong>
+                                        (platooning).
+                                        A diferencia de plataformas para vehículos autónomos individuales, RUPU se
+                                        enfoca en el control cooperativo y descentralizado.
+                                    </p>
+                                    <p class="text-secondary font-body-lg leading-relaxed mb-8">
+                                        Cada robot seguidor debe resolver simultáneamente dos problemas: <strong>control
+                                            lateral</strong> para seguir la pista marcada, y <strong>control
+                                            longitudinal</strong> para mantener una distancia deseada respecto a su
+                                        predecesor mediante sensores frontales y comunicación inalámbrica.
+                                    </p>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div
+                                            class="bg-surface-white p-4 rounded-lg border border-outline-variant shadow-sm">
+                                            <span
+                                                class="material-symbols-outlined text-primary mb-2 text-3xl">route</span>
+                                            <h4 class="font-bold text-on-surface mb-1">Trayectoria</h4>
+                                            <p class="text-sm text-secondary">Línea de referencia física para
+                                                simplificar la percepción visual.</p>
+                                        </div>
+                                        <div
+                                            class="bg-surface-white p-4 rounded-lg border border-outline-variant shadow-sm">
+                                            <span
+                                                class="material-symbols-outlined text-primary mb-2 text-3xl">wifi</span>
+                                            <h4 class="font-bold text-on-surface mb-1">Comunicación</h4>
+                                            <p class="text-sm text-secondary">Intercambio de datos V2V para estrategias
+                                                cooperativas avanzadas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-tr from-rojito/20 to-transparent rounded-2xl transform translate-x-4 translate-y-4">
+                                    </div>
+                                    <img src="\assets\img\robot.png" alt="RUPU Platform Hardware"
+                                        class="relative z-10 w-full h-[450px] object-cover rounded-2xl shadow-xl border border-outline-variant">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
                     <!-- Technical Highlights -->
                     <section class="bg-surface-white border-y border-outline-variant py-section-padding">
                         <div class="max-w-container-max-width mx-auto px-gutter">
@@ -164,8 +227,8 @@
                                 <h2 class="font-headline-md text-headline-md text-on-surface">Arquitectura del Sistema
                                 </h2>
                                 <p class="text-secondary font-body-md max-w-2xl mx-auto mt-stack-sm">
-                                    Diseñado bajo principios de rigurosidad académica para permitir la validación de
-                                    modelos matemáticos complejos en entornos controlados.
+                                    Diseñado bajo principios de rigurosidad académica para concentrarse en la dinámica,
+                                    coordinación y estabilidad del pelotón.
                                 </p>
                             </div>
                             <div class="grid md:grid-cols-3 gap-stack-lg">
@@ -316,29 +379,7 @@ agent.startFormation();</code></pre>
                         </div>
                     </section>
                 </main>
-                <!-- Footer -->
-                <footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant">
-                    <div
-                        class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
-                        <div class="flex flex-row gap-4 items-center">
-                            <div class="flex items-center gap-2">
-                                <img alt="RÜPÜ Logo" class="w-[60px] opacity-80 transform -translate-y-1"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBALmme-AbmBhij6kCnuXPL-yLbWEZ7gn1HUTQXVSXF0l5T7UfWojh4LNH5gvm9V8VjJ9oF2EzEk9jfAJkP46GwHC17k2Cj-u4mjfKd5N7EME870huGCwDZ6qOlmbq0xCbC5kGqQVR7aV_cC039AIeaaZs5ddoJMX5zpmeCbj8GXZ0Uy0Yn-AX4hp7yw6fIh1oSnLgdd-UDmTq3fgsQwevQkQwoBHBZjXAieqzMC-tklZ8nPTfJlAJh_YLWE17F_ya2J1z1yxSSSBO2o_Y" />
-                            </div>
-                            <p class="font-label-md text-label-md text-on-primary/60 m-0">© 2026 RÜPÜ Robotics System
-                                UTFSM. Todos los derechos reservados.</p>
-                        </div>
-                        <div class="flex gap-stack-lg mt-stack-md md:mt-0">
-                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
-                                href="https://github.com/example/rupu-robotics" target="_blank"
-                                rel="noopener noreferrer">Repositorio GitHub</a>
-                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
-                                href="#">Licencia MIT</a>
-                            <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
-                                href="#">Contacto</a>
-                        </div>
-                    </div>
-                </footer>
+
             </div>
             <div id="view-entorno" class="view-section hidden px-gutter py-stack-lg w-full">
                 <div class="max-w-4xl">
@@ -410,17 +451,50 @@ agent.startFormation();</code></pre>
                         <div class="bg-surface-container-low p-4 border-l-4 border-rojito">
                             <p class="text-label-md font-label-md text-on-surface flex items-center gap-2">
                                 <span class="material-symbols-outlined text-rojito">info</span>
-                                Nota técnica: Instale la versión 'ESP32 by Espressif Systems' desde el Board Manager
+                                Nota técnica: Instale la última versión 'ESP32 by Espressif Systems' desde el Board
+                                Manager
                                 tras agregar el link.
                             </p>
                         </div>
                     </section>
-                    <!-- Step 3: Python Env -->
+                    <!-- Step 3: Instalación de la Librería RUPU -->
                     <section
                         class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
                         <div class="flex items-center gap-2 mb-6">
                             <span
                                 class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">3</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Instalación de la Librería
+                                RUPU</h3>
+                        </div>
+                        <p class="text-body-md font-body-md mb-6 text-on-surface-variant">
+                            Para poder utilizar las funciones específicas de los robots RUPU, es necesario instalar la
+                            librería oficial que contiene todos los algoritmos de control.
+                        </p>
+                        <ol class="list-decimal pl-6 space-y-4 mb-8 text-on-surface-variant font-body-md">
+                            <li>Diríjase al repositorio oficial en GitHub y descargue la carpeta
+                                <strong>RUPU_Library</strong>.</li>
+                            <li>Mueva la carpeta descargada al directorio donde su sistema guarda las librerías de
+                                Arduino. Por defecto, suele ser:
+                                <br>
+                                <code
+                                    class="bg-surface-container-low px-2 py-1 rounded text-sm text-primary break-all font-code-sm mt-2 inline-block">C:\Users\[Tu_Usuario]\Documents\Arduino\libraries</code>
+                            </li>
+                            <li>Una vez incluida la librería, basta con abrir el ejemplo
+                                <strong>RUPU_Procedural_Test</strong> para poner en marcha el funcionamiento por defecto
+                                del robot.</li>
+                        </ol>
+                        <a href="https://github.com/FRifoM99/RUPU" target="_blank" rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 bg-rojito text-white px-6 py-3 font-bold font-label-md text-label-md uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all rounded shadow-md">
+                            <span class="material-symbols-outlined">download</span> Descargar RUPU Library
+                        </a>
+                    </section>
+
+                    <!-- Step 4: Python Env -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">4</span>
                             <h3 class="font-headline-md text-headline-md text-on-surface">Entorno Python y Pip</h3>
                         </div>
                         <p class="text-body-md font-body-md mb-4 text-on-surface-variant">
@@ -437,7 +511,45 @@ agent.startFormation();</code></pre>
                             <div class="mt-4"># Activar entorno (Windows)</div>
                             <div class="text-primary-fixed-dim">.\rupu_env\Scripts\activate</div>
                             <div class="mt-4"># Instalación de dependencias críticas</div>
-                            <div class="text-primary-fixed-dim">pip install numpy scipy matplotlib pyserial</div>
+                            <div class="text-primary-fixed-dim">pip install numpy scipy matplotlib pyserial
+                                customtkinter paho-mqtt pymysql</div>
+                        </div>
+                    </section>
+
+                    <!-- Step 5: Interfaz de Control (GUI) -->
+                    <section
+                        class="mb-12 bg-surface-white border border-surface-container-highest p-stack-lg rounded-lg shadow-sm">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span
+                                class="bg-rojito text-on-primary w-8 h-8 flex items-center justify-center font-bold text-label-md">5</span>
+                            <h3 class="font-headline-md text-headline-md text-on-surface">Ejecución de RUPU GUI</h3>
+                        </div>
+                        <p class="text-body-md font-body-md mb-6 text-on-surface-variant">
+                            Una vez configurado su entorno Python, puede lanzar la interfaz gráfica (GUI) que permite
+                            monitorizar y controlar los robots RUPU de forma visual e intuitiva.
+                        </p>
+                        <ol class="list-decimal pl-6 space-y-4 mb-8 text-on-surface-variant font-body-md">
+                            <li>Asegúrese de tener su entorno virtual de Python activado tal como se indicó en el paso
+                                anterior.</li>
+                            <li>Descargue o ubique la carpeta contenedora de la interfaz en su computadora (la carpeta
+                                <strong>RUPU_GUI_AUTO/GUI</strong>).</li>
+                            <li>Navegue hasta esa carpeta desde su terminal y ejecute el archivo principal mediante el
+                                siguiente comando:
+                                <br>
+                                <code
+                                    class="bg-surface-container-low px-2 py-1 rounded text-sm text-primary break-all font-code-sm mt-2 inline-block">python RupuGUIauto.py</code>
+                            </li>
+                            <li><strong>Sincronización Automática:</strong> Para que la GUI detecte al RUPU, ponga la
+                                mano a unos centímetros sobre el sensor de distancia ToF durante unos segundos. Cuando
+                                el LED integrado de la ESP32 comience a parpadear, la GUI detectará automáticamente la
+                                IP del RUPU.</li>
+                        </ol>
+                        <div class="bg-surface-container-low p-4 border-l-4 border-rojito">
+                            <p class="text-label-md font-label-md text-on-surface flex items-center gap-2">
+                                <span class="material-symbols-outlined text-rojito">tips_and_updates</span>
+                                La interfaz gráfica requiere los paquetes añadidos en el paso 4 (CustomTkinter,
+                                Matplotlib, Paho MQTT, PyMySQL) para funcionar correctamente.
+                            </p>
                         </div>
                     </section>
                     <!-- Navigation Buttons -->
@@ -458,33 +570,40 @@ agent.startFormation();</code></pre>
                         <p class="font-body-lg text-body-lg text-secondary max-w-2xl">Guía detallada para el ensamblaje
                             mecánico y la integración de componentes electrónicos del robot RÜPÜ.</p>
                     </div>
-                    
+
                     <!-- Visor 3D -->
-                    <div class="mb-12 w-full h-[500px] bg-[#f8f9fa] rounded-xl overflow-hidden border border-outline-variant relative shadow-inner">
-                        <div class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 flex-col">
-                            <span class="material-symbols-outlined text-6xl mb-2 text-primary animate-pulse">3d_rotation</span>
+                    <div
+                        class="mb-12 w-full h-[500px] bg-[#f8f9fa] rounded-xl overflow-hidden border border-outline-variant relative shadow-inner">
+                        <div
+                            class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 flex-col">
+                            <span
+                                class="material-symbols-outlined text-6xl mb-2 text-primary animate-pulse">3d_rotation</span>
                             <p class="font-bold text-secondary">Cargando Ensamblaje 3D...</p>
                         </div>
-                        
+
                         <!-- Controles de Cámara -->
-                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-outline-variant/50">
-                            <span class="text-xs font-bold text-secondary mr-2 uppercase tracking-widest hidden md:block">Vistas:</span>
-                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Frontal</button>
-                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '90deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Lateral</button>
-                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 0deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Superior</button>
-                            <button onclick="document.getElementById('visor-rupu').cameraOrbit = '45deg 55deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';" class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Isométrica</button>
+                        <div
+                            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-outline-variant/50">
+                            <span
+                                class="text-xs font-bold text-secondary mr-2 uppercase tracking-widest hidden md:block">Vistas:</span>
+                            <button
+                                onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
+                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Frontal</button>
+                            <button
+                                onclick="document.getElementById('visor-rupu').cameraOrbit = '90deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
+                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Lateral</button>
+                            <button
+                                onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 0deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
+                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Superior</button>
+                            <button
+                                onclick="document.getElementById('visor-rupu').cameraOrbit = '45deg 55deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
+                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Isométrica</button>
                         </div>
 
-                        <model-viewer
-                            id="visor-rupu"
-                            src="assets/models/Idea%20soporte%20Horn%20V1%20v1.glb"
-                            alt="Modelo 3D RÜPÜ"
-                            auto-rotate
-                            camera-controls
-                            shadow-intensity="1"
+                        <model-viewer id="visor-rupu" src="assets/models/Idea%20soporte%20Horn%20V1%20v1.glb"
+                            alt="Modelo 3D RÜPÜ" auto-rotate camera-controls shadow-intensity="1"
                             camera-orbit="45deg 55deg 105%"
-                            style="width: 100%; height: 100%; background-color: transparent; z-index: 10; position: relative;"
-                        ></model-viewer>
+                            style="width: 100%; height: 100%; background-color: transparent; z-index: 10; position: relative;"></model-viewer>
                     </div>
 
                     <!-- Step 1: Installation -->
@@ -1024,8 +1143,32 @@ agent.startFormation();</code></pre>
                             </div>
                         </div>
                     </div>
+
         </main>
     </div>
+
+    <!-- Footer Global -->
+    <footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant w-full mt-auto">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
+            <div class="flex flex-row gap-4 items-center">
+                <div class="flex items-center gap-2">
+                    <img alt="RÜPÜ Logo" class="h-10 w-auto opacity-80" src="assets/img/logo_rupu.png" />
+                </div>
+                <p class="font-label-md text-label-md text-on-primary/60 m-0">© 2026 RÜPÜ Robotics System
+                    UTFSM. Todos los derechos reservados.</p>
+            </div>
+            <div class="flex gap-stack-lg mt-stack-md md:mt-0">
+                <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                    href="https://github.com/FRifoM99/RUPU" target="_blank" rel="noopener noreferrer">Repositorio
+                    GitHub</a>
+                <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                    href="#">Licencia MIT</a>
+                <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
+                    href="#">Contacto</a>
+            </div>
+        </div>
+    </footer>
 
     <!-- Logo Modal -->
     <div id="logo-modal"

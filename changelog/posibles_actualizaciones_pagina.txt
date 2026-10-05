@@ -1,0 +1,7 @@
+que ola barra lateral tenga una animcacion, es decir que no este siempre presente en pantalla, si no que se despliege cuando el cursor pase por encima o cuando se cliquee.
+
+tambien quiero que cuando se pase el cursor por encima de la barra supoerior en la seccion de documetnacion aparezca una lista desplegada que tenga las misma secciones que la tabla lateral (armado, entorno, programacion y calibracion, y se pueda acceder directamente desde ahi)
+
+en la parte de demostraciones me gustaria quitar la tabla lateral de guias tecnicas, ya que eso ba en la seccion de documetnacion y es redudandte ponerla ahi tambien.
+
+añadir la franja de instituciones donde se mueve automaticamente y va mostrando las distintas insituciones
