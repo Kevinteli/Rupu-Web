@@ -170,10 +170,29 @@ input[type="text"]:focus {
     background-color: #24292E !important;
     /* GitHub dark gray */
     color: #e2e2e2 !important;
-    padding: 1.5rem !important;
+    padding: 1.25rem !important;
     border-radius: 0.5rem !important;
     font-family: 'JetBrains Mono', monospace !important;
     border: none !important;
+    overflow-x: auto !important;
+    word-break: break-word;
+    font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+    .code-container {
+        padding: 1.5rem !important;
+        font-size: 0.95rem;
+    }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 /* --- 8. Specific Layout Fixes --- */

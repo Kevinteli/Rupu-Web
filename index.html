@@ -4,7 +4,37 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RÜPÜ Robotics</title>
+    <title>RÜPÜ Robotics | Plataforma de Platooning UTFSM</title>
+    <meta name="description"
+        content="Plataforma experimental de robótica móvil cooperativa de bajo costo para el estudio de control de flotas y platooning (UTFSM)." />
+    <meta name="theme-color" content="#ba1a20" />
+
+    <!-- Favicon (Icono de pestaña para PC y Móviles) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/img/favicon.png?v=2" />
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/img/favicon.png?v=2" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon.png?v=2" />
+
+    <!-- Open Graph / Vista previa para WhatsApp, LinkedIn, Telegram, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RÜPÜ Robotics UTFSM" />
+    <meta property="og:title" content="RÜPÜ Robotics — Plataforma de Robótica Cooperativa" />
+    <meta property="og:description"
+        content="Plataforma experimental de bajo costo diseñada en la UTFSM para el estudio del control de flotas de robots móviles y line-following platooning." />
+    <meta property="og:url" content="http://rupu.elo.usm.cl/" />
+    <meta property="og:image" content="https://kevinteli.github.io/Rupu-Web/assets/img/og-preview.jpg" />
+    <meta property="og:image:secure_url" content="https://kevinteli.github.io/Rupu-Web/assets/img/og-preview.jpg" />
+    <meta property="og:image" content="http://rupu.elo.usm.cl/assets/img/og-preview.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RÜPÜ Robotics — Plataforma de Robótica Cooperativa" />
+    <meta name="twitter:description"
+        content="Plataforma experimental de bajo costo diseñada en la UTFSM para el estudio del control de flotas de robots móviles y line-following platooning." />
+    <meta name="twitter:image" content="https://kevinteli.github.io/Rupu-Web/assets/img/og-preview.jpg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,10 +57,10 @@
 
     <!-- Header Fijo -->
     <header class="bg-primary shadow-[0px_4px_12px_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50 h-20">
-        <div class="flex justify-between items-center px-6 w-full max-w-7xl mx-auto h-full">
+        <div class="flex justify-between items-center px-4 md:px-6 w-full max-w-7xl mx-auto h-full">
             <div class="flex items-center gap-8">
                 <a id="nav-logo" class="flex items-center hover:opacity-80 transition-opacity spa-link" href="#inicio"
-                    data-view="inicio"><img alt="RÜPÜ Home" class="h-12 w-auto object-contain border-none"
+                    data-view="inicio"><img alt="RÜPÜ Home" class="h-10 md:h-12 w-auto object-contain border-none"
                         src="assets/img/logo_rupu.png" /></a>
             </div>
             <nav class="hidden md:flex items-center gap-8">
@@ -47,23 +77,80 @@
                     href="#galeria" data-view="galeria">Demostraciones<span
                         class="absolute bottom-0 left-0 w-full h-[2px] bg-on-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></span></a>
             </nav>
-            <div class="flex items-center gap-stack-md">
-                <div class="bg-on-primary/10 rounded-full px-3 py-1 flex items-center gap-2">
+            <div class="flex items-center gap-2 md:gap-stack-md">
+                <div class="hidden sm:flex bg-on-primary/10 rounded-full px-3 py-1 items-center gap-2">
                     <span class="material-symbols-outlined text-on-primary text-[20px]">search</span>
                     <input
-                        class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-32 outline-none"
+                        class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 text-label-md w-28 md:w-32 outline-none"
                         placeholder="Buscar..." type="text" />
                 </div>
                 <button
-                    class="material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+                    class="hidden sm:inline-flex material-symbols-outlined text-on-primary hover:opacity-90 transition-opacity p-2 rounded-full">account_circle</button>
+                <button id="mobile-menu-btn" aria-label="Abrir menú"
+                    class="md:hidden material-symbols-outlined text-on-primary hover:bg-on-primary/10 transition-colors p-2 rounded-lg text-[28px]">menu</button>
             </div>
         </div>
     </header>
 
+    <!-- Menú Móvil Desplegable (Drawer) -->
+    <div id="mobile-menu-backdrop"
+        class="fixed inset-0 bg-black/60 backdrop-blur-xs z-[60] hidden opacity-0 transition-opacity duration-300 md:hidden">
+    </div>
+    <aside id="mobile-menu"
+        class="fixed top-0 right-0 bottom-0 w-72 max-w-[85vw] bg-surface-white z-[70] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col md:hidden">
+        <div class="bg-primary px-5 h-20 flex items-center justify-between text-on-primary shrink-0">
+            <span class="font-headline-md text-lg font-bold tracking-wide">Navegación RÜPÜ</span>
+            <button id="mobile-menu-close" aria-label="Cerrar menú"
+                class="material-symbols-outlined p-2 rounded-lg hover:bg-white/10 transition-colors">close</button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-4 space-y-6">
+            <div>
+                <p class="px-4 text-xs font-bold uppercase tracking-wider text-secondary mb-2">Secciones</p>
+                <nav class="flex flex-col gap-1">
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#inicio" data-view="inicio">
+                        <span class="material-symbols-outlined text-[20px]">home</span>
+                        <span>Sobre el Proyecto</span>
+                    </a>
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#galeria" data-view="galeria">
+                        <span class="material-symbols-outlined text-[20px]">smart_display</span>
+                        <span>Demostraciones</span>
+                    </a>
+                </nav>
+            </div>
+            <div class="border-t border-outline-variant pt-4">
+                <p class="px-4 text-xs font-bold uppercase tracking-wider text-secondary mb-2">Documentación v1.0</p>
+                <nav class="flex flex-col gap-1">
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#entorno" data-view="entorno">
+                        <span class="material-symbols-outlined text-[20px]">computer</span>
+                        <span>Entorno de Trabajo</span>
+                    </a>
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#armado" data-view="armado">
+                        <span class="material-symbols-outlined text-[20px]">precision_manufacturing</span>
+                        <span>Armado de RÜPÜ</span>
+                    </a>
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#programacion" data-view="programacion">
+                        <span class="material-symbols-outlined text-[20px]">code_blocks</span>
+                        <span>Programación</span>
+                    </a>
+                    <a class="spa-link flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface hover:bg-surface-container-low transition-colors"
+                        href="#calibracion" data-view="calibracion">
+                        <span class="material-symbols-outlined text-[20px]">tune</span>
+                        <span>Calibración</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </aside>
+
     <!-- Contenedor Maestro -->
     <div id="master-container" class="flex max-w-7xl mx-auto min-h-screen pt-20">
 
-        <!-- Sidebar Fijo (Oculto en Inicio y Galeria) -->
+        <!-- Sidebar Fijo (Oculto en Inicio, Galeria y Móvil) -->
         <aside id="app-sidebar"
             class="hidden md:flex flex-col py-8 gap-4 w-64 h-[calc(100vh-80px)] sticky top-20 bg-surface border-r border-outline-variant shrink-0">
             <div class="px-6 mb-4 text-center">
@@ -104,39 +191,65 @@
 
         <!-- Area Dinámica Principal -->
         <main id="app-content" class="flex-1 w-full overflow-x-hidden">
+            <!-- Barra rápida de Guías Técnicas para Móvil -->
+            <div id="mobile-docs-nav"
+                class="hidden md:hidden bg-surface-white border-b border-outline-variant px-4 py-3 sticky top-20 z-30 shadow-xs">
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                    <a class="spa-link shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold bg-rojito text-white"
+                        href="#entorno" data-view="entorno">
+                        <span class="material-symbols-outlined text-[16px]">computer</span>Entorno
+                    </a>
+                    <a class="spa-link shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant"
+                        href="#armado" data-view="armado">
+                        <span class="material-symbols-outlined text-[16px]">precision_manufacturing</span>Armado
+                    </a>
+                    <a class="spa-link shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant"
+                        href="#programacion" data-view="programacion">
+                        <span class="material-symbols-outlined text-[16px]">code_blocks</span>Programación
+                    </a>
+                    <a class="spa-link shrink-0 flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold bg-surface-container text-on-surface-variant"
+                        href="#calibracion" data-view="calibracion">
+                        <span class="material-symbols-outlined text-[16px]">tune</span>Calibración
+                    </a>
+                </div>
+            </div>
+
             <div id="view-inicio" class="view-section hidden w-full">
-                <main class="technical-grid min-h-screen relative pt-16 md:pt-0">
-                    <!-- Added padding for mobile since header is fixed -->
+                <main class="technical-grid min-h-screen relative">
                     <!-- Hero Section -->
-                    <section class="relative min-h-[85vh] flex items-center overflow-hidden bg-black" id="hero-section">
+                    <section
+                        class="relative min-h-[75vh] md:min-h-[85vh] py-12 md:py-0 flex items-center overflow-hidden bg-black"
+                        id="hero-section">
                         <div class="absolute inset-0 z-0" id="hero-bg-wrapper">
                             <img alt="A sophisticated close-up of a RÜPÜ robotic platform wheel and chassis, glowing with subtle red LED status indicators in a dark, high-tech engineering laboratory."
                                 class="w-full h-full object-cover"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl5_bfM1YvU4MUZYYorXx48mBpBxAVFxpTneluTDjDMZSKbVjREp8SCwxay_gcGGrKfcvxXIGwldLoWY3xTtIm1RAaDs5KXyHwzeoizu9NDA-X8NUguWCbRuiUK5sBwJJu5UOFSm7Fba63dKMQjcc133xtv7LrhEuaKeFqlsETNz1c3EqCW5T0_3HtRwo4AHLnlnuN_EzdRJ6qiqbeSWd-xjx3GMh4VsYT9hGlLJo-QFZZhfnXPhDZ4agj8uRXYK321xnLKmr-ke9gpiY" />
                             <div class="absolute inset-0 hero-gradient"></div>
                         </div>
-                        <div class="absolute right-0 top-1/2 -translate-y-1/2 z-40"><a
+                        <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 z-40"><a
                                 class="bg-[#d32f2f] text-white p-3 flex items-center gap-2 font-bold font-label-md text-label-md uppercase tracking-widest floating-cta shadow-lg hover:pr-5 transition-all"
                                 href="#"><span class="material-symbols-outlined transform -rotate-90">link</span>Free
                                 System Trial</a></div>
                         <div
-                            class="relative z-10 w-full max-w-container-max-width mx-auto px-gutter grid grid-cols-12 gap-gutter">
-                            <div class="col-span-12 md:col-span-10 lg:col-span-8 flex flex-col gap-stack-lg">
+                            class="relative z-10 w-full max-w-container-max-width mx-auto px-4 sm:px-gutter grid grid-cols-12 gap-4 md:gap-gutter">
+                            <div class="col-span-12 md:col-span-10 lg:col-span-8 flex flex-col gap-6 md:gap-stack-lg">
                                 <h1 class="flex flex-col"><span
-                                        class="text-[#d32f2f] font-headline-lg text-headline-lg uppercase tracking-tight mb-2">ROBÓTICA
+                                        class="text-[#d32f2f] font-headline-lg text-2xl sm:text-3xl md:text-headline-lg uppercase tracking-tight mb-2">ROBÓTICA
                                         COOPERATIVA</span><span
-                                        class="text-white font-headline-lg text-headline-lg uppercase tracking-tight leading-tight">PLATAFORMA
+                                        class="text-white font-headline-lg text-3xl sm:text-4xl md:text-headline-lg uppercase tracking-tight leading-tight">PLATAFORMA
                                         PARA EL ESTUDIO DE PLATOONING</span></h1>
                                 <p
-                                    class="text-secondary-fixed text-body-lg font-body-lg max-w-2xl leading-relaxed mt-4">
+                                    class="text-secondary-fixed text-base md:text-body-lg font-body-lg max-w-2xl leading-relaxed mt-2 md:mt-4">
                                     RUPU es una plataforma experimental de bajo costo diseñada para el estudio del
                                     control de flotas de robots móviles y problemas de line-following platooning.
                                     Integrando cómputo, sensado local y comunicación inalámbrica.</p>
-                                <div class="flex flex-wrap gap-stack-md mt-stack-md"><a
-                                        class="bg-[#d32f2f] text-white px-8 py-4 font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-[#d32f2f] transition-all duration-300 inline-block spa-link"
+                                <div
+                                    class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-stack-md mt-2 md:mt-stack-md">
+                                    <a class="bg-[#d32f2f] text-white px-6 py-3.5 md:px-8 md:py-4 text-center font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-[#d32f2f] transition-all duration-300 inline-block spa-link"
                                         href="#" data-view="entorno">Explorar Guía Técnica</a><a
-                                        class="border-2 border-white text-white px-8 py-4 font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 inline-block spa-link"
-                                        href="#" data-view="galeria">Ver Demostraciones</a></div>
+                                        class="border-2 border-white text-white px-6 py-3.5 md:px-8 md:py-4 text-center font-bold font-label-md text-label-md uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 inline-block spa-link"
+                                        href="#" data-view="galeria">Ver Demostraciones</a>
+                                </div>
                             </div>
                         </div>
                         <div class="absolute bottom-10 right-gutter z-20 hidden lg:block" id="ayuda-popup">
@@ -157,7 +270,6 @@
                             </div>
                         </div>
                     </section>
-                    </section>
 
                     <!-- Contexto Nuevos Participantes -->
                     <section
@@ -175,7 +287,7 @@
                                             Integrantes</span>
                                     </div>
                                     <h2
-                                        class="font-headline-lg text-4xl text-on-surface mb-6 font-extrabold leading-tight">
+                                        class="font-headline-lg text-3xl md:text-4xl text-on-surface mb-6 font-extrabold leading-tight">
                                         ¿Qué es el proyecto RUPU?</h2>
                                     <p class="text-secondary font-body-lg leading-relaxed mb-6">
                                         Nacida en la <strong>UTFSM (2021)</strong>, RUPU fue concebida desde su origen
@@ -190,7 +302,7 @@
                                             longitudinal</strong> para mantener una distancia deseada respecto a su
                                         predecesor mediante sensores frontales y comunicación inalámbrica.
                                     </p>
-                                    <div class="grid grid-cols-2 gap-4">
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         <div
                                             class="bg-surface-white p-4 rounded-lg border border-outline-variant shadow-sm">
                                             <span
@@ -211,10 +323,10 @@
                                 </div>
                                 <div class="relative">
                                     <div
-                                        class="absolute inset-0 bg-gradient-to-tr from-rojito/20 to-transparent rounded-2xl transform translate-x-4 translate-y-4">
+                                        class="absolute inset-0 bg-gradient-to-tr from-rojito/20 to-transparent rounded-2xl transform translate-x-2 translate-y-2 md:translate-x-4 md:translate-y-4">
                                     </div>
                                     <img src="assets/img/robot.png" alt="RUPU Platform Hardware"
-                                        class="relative z-10 w-full h-[450px] object-cover rounded-2xl shadow-xl border border-outline-variant">
+                                        class="relative z-10 w-full h-[280px] sm:h-[360px] md:h-[450px] object-cover rounded-2xl shadow-xl border border-outline-variant">
                                 </div>
                             </div>
                         </div>
@@ -576,7 +688,7 @@ agent.startFormation();</code></pre>
 
                     <!-- Visor 3D -->
                     <div
-                        class="mb-12 w-full h-[500px] bg-[#f8f9fa] rounded-xl overflow-hidden border border-outline-variant relative shadow-inner">
+                        class="mb-12 w-full h-[360px] md:h-[500px] bg-[#f8f9fa] rounded-xl overflow-hidden border border-outline-variant relative shadow-inner">
                         <div
                             class="absolute inset-0 flex items-center justify-center z-0 pointer-events-none opacity-20 flex-col">
                             <span
@@ -586,21 +698,21 @@ agent.startFormation();</code></pre>
 
                         <!-- Controles de Cámara -->
                         <div
-                            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg flex items-center gap-2 border border-outline-variant/50">
+                            class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-md px-3 md:px-4 py-1.5 md:py-2 rounded-full shadow-lg flex items-center gap-1.5 md:gap-2 border border-outline-variant/50 max-w-[94%] overflow-x-auto no-scrollbar">
                             <span
                                 class="text-xs font-bold text-secondary mr-2 uppercase tracking-widest hidden md:block">Vistas:</span>
                             <button
                                 onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
-                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Frontal</button>
+                                class="shrink-0 px-2.5 md:px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-xs md:text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Frontal</button>
                             <button
                                 onclick="document.getElementById('visor-rupu').cameraOrbit = '90deg 90deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
-                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Lateral</button>
+                                class="shrink-0 px-2.5 md:px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-xs md:text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Lateral</button>
                             <button
                                 onclick="document.getElementById('visor-rupu').cameraOrbit = '0deg 0deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
-                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Superior</button>
+                                class="shrink-0 px-2.5 md:px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-xs md:text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Superior</button>
                             <button
                                 onclick="document.getElementById('visor-rupu').cameraOrbit = '45deg 55deg 105%'; document.getElementById('visor-rupu').interactionPrompt = 'none';"
-                                class="px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Isométrica</button>
+                                class="shrink-0 px-2.5 md:px-3 py-1 bg-gray-200 text-gray-800 hover:bg-primary hover:text-white rounded-full text-xs md:text-sm font-bold transition-colors border border-gray-300 hover:border-primary">Isométrica</button>
                         </div>
 
                         <model-viewer id="visor-rupu" src="assets/models/Idea%20soporte%20Horn%20V1%20v1.glb"
@@ -686,11 +798,12 @@ agent.startFormation();</code></pre>
                         </div>
                     </section>
                     <!-- Navigation Buttons -->
-                    <div class="flex justify-between items-center py-stack-lg border-t border-outline-variant mt-8">
-                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 py-stack-lg border-t border-outline-variant mt-8">
+                        <a class="spa-link flex items-center justify-center gap-2 border border-rojito text-rojito px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
                             href="#entorno" data-view="entorno"><span
                                 class="material-symbols-outlined">arrow_back</span>Anterior: Entorno de Trabajo</a>
-                        <a class="spa-link flex items-center gap-2 bg-rojito text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+                        <a class="spa-link flex items-center justify-center gap-2 bg-rojito text-on-primary px-6 py-2.5 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
                             href="#programacion" data-view="programacion">Siguiente: Programación<span
                                 class="material-symbols-outlined">arrow_forward</span></a>
                     </div>
@@ -756,8 +869,8 @@ agent.startFormation();</code></pre>
                             Mapping de Dispositivos
                         </h2>
                         <div
-                            class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
-                            <table class="w-full text-left border-collapse">
+                            class="overflow-x-auto rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+                            <table class="w-full text-left border-collapse min-w-[480px]">
                                 <thead>
                                     <tr class="bg-primary text-on-primary">
                                         <th class="p-4 font-bold text-sm">ID Robot</th>
@@ -884,11 +997,12 @@ agent.startFormation();</code></pre>
                         </div>
                     </div>
                     <!-- Navigation Buttons -->
-                    <div class="flex justify-between items-center py-stack-lg border-t border-outline-variant mt-8">
-                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                    <div
+                        class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 py-stack-lg border-t border-outline-variant mt-8">
+                        <a class="spa-link flex items-center justify-center gap-2 border border-rojito text-rojito px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
                             href="#armado" data-view="armado"><span
                                 class="material-symbols-outlined">arrow_back</span>Anterior: Armado</a>
-                        <a class="spa-link flex items-center gap-2 bg-rojito text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
+                        <a class="spa-link flex items-center justify-center gap-2 bg-rojito text-on-primary px-6 py-2.5 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all"
                             href="#calibracion" data-view="calibracion">Siguiente: Calibración<span
                                 class="material-symbols-outlined">arrow_forward</span></a>
                     </div>
@@ -912,8 +1026,8 @@ agent.startFormation();</code></pre>
                             1. Calibración de Sensores
                         </h2>
                         <div
-                            class="overflow-hidden rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
-                            <table class="w-full text-left border-collapse">
+                            class="overflow-x-auto rounded-xl border border-outline-variant shadow-sm bg-surface-container-lowest">
+                            <table class="w-full text-left border-collapse min-w-[400px]">
                                 <thead>
                                     <tr class="bg-primary text-on-primary">
                                         <th class="p-4 font-bold text-sm">Sensor</th>
@@ -937,10 +1051,10 @@ agent.startFormation();</code></pre>
                             <span class="material-symbols-outlined text-primary">precision_manufacturing</span>
                             2. Pruebas de Movimiento
                         </h2>
-                        <div class="glass-card p-6 rounded-xl">
+                        <div class="glass-card p-6 rounded-xl overflow-hidden">
                             <p class="text-sm text-secondary mb-4">Ejecute el siguiente script para validar la
                                 cinemática inversa y los límites de los actuadores.</p>
-                            <pre><code><span class="code-accent">void</span> <span class="text-primary-fixed-dim">testKinematics</span>() {
+                            <pre class="overflow-x-auto text-xs sm:text-sm"><code><span class="code-accent">void</span> <span class="text-primary-fixed-dim">testKinematics</span>() {
   <span class="code-string">// Mover a posición neutral</span>
   robot.moveTo(<span class="text-outline-variant">0, 0, 100</span>);
   delay(<span class="text-outline-variant">1000</span>);
@@ -971,7 +1085,7 @@ agent.startFormation();</code></pre>
                         </div>
                     </div>
                     <div class="mt-12 pt-8 border-t border-outline-variant flex justify-start items-center">
-                        <a class="spa-link flex items-center gap-2 border border-rojito text-rojito px-6 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
+                        <a class="spa-link w-full sm:w-auto flex items-center justify-center gap-2 border border-rojito text-rojito px-6 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container/5 transition-all"
                             href="#programacion" data-view="programacion">
                             <span class="material-symbols-outlined">arrow_back</span>
                             Anterior: Programación
@@ -979,18 +1093,19 @@ agent.startFormation();</code></pre>
                     </div>
                 </section>
             </div>
-            <div id="view-galeria" class="view-section hidden px-gutter max-w-container-max-width mx-auto py-12 w-full">
+            <div id="view-galeria"
+                class="view-section hidden px-gutter max-w-container-max-width mx-auto py-8 md:py-12 w-full">
                 <!-- Bento Grid Layout -->
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
                     <!-- Main Featured Video -->
                     <div
-                        class="md:col-span-8 group relative overflow-hidden rounded-3xl bg-black aspect-video md:aspect-auto md:h-[500px] shadow-2xl">
+                        class="md:col-span-8 group relative overflow-hidden rounded-3xl bg-black min-h-[360px] md:h-[500px] shadow-2xl">
                         <img class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700"
                             data-alt="A cinematic wide shot of a high-tech robotic arm performing precision movements in a sterile, dark laboratory environment. The scene is illuminated by striking red LED light strips that trace the arm's contours, creating a sophisticated and futuristic atmosphere. The background features blurred digital monitors displaying complex GUI control data in a crisp white and deep red color palette. The overall mood is focused, professional, and technologically advanced, echoing a high-end industrial design aesthetic."
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzRRoKm5ItcU5oAh60OS9yOmEN2vIaF4EerhCpvxkFVaub_GoWkNmWj5flfoQb3tJmXazjfoz6zP8vxXcIyKSW08hGPKMx3rn8CcnldSs43sA_raLcEeK59I_gxj06Mv6LrFV_6H3Je8peogthjtVhqYdjv0_EsT_LUcGAz1GxzW_8u7NLnDvx3YEgdNNbjAR3tyyxy7GxxTNUIp8FLqBR3vqUZ2411VBLlOO--CJJ3j1eQXDoBD0wIze_2taUeJrv4lyaq4FuS_mZ" />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-                        <div class="absolute bottom-0 left-0 p-8 w-full">
-                            <div class="flex items-center gap-3 mb-3">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-5 sm:p-8 w-full">
+                            <div class="flex items-center gap-3 mb-2 sm:mb-3">
                                 <span
                                     class="bg-primary text-on-primary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest">En
                                     Vivo</span>
@@ -998,11 +1113,13 @@ agent.startFormation();</code></pre>
                                     <span class="material-symbols-outlined text-sm">schedule</span> 12:45 min
                                 </span>
                             </div>
-                            <h3 class="text-3xl font-bold text-on-primary mb-2">Control Maestro-Esclavo vía GUI</h3>
-                            <p class="text-on-primary/80 max-w-xl mb-6">Demostración de latencia cero utilizando el
+                            <h3 class="text-xl sm:text-3xl font-bold text-on-primary mb-2">Control Maestro-Esclavo vía
+                                GUI</h3>
+                            <p class="text-on-primary/80 text-sm sm:text-base max-w-xl mb-4 sm:mb-6">Demostración de
+                                latencia cero utilizando el
                                 panel de control RÜPÜ v1.2. Interfaz táctil reactiva con retroalimentación haptica.</p>
                             <button
-                                class="flex items-center gap-2 bg-on-primary text-primary px-6 py-3 rounded-full font-bold hover:bg-primary-container transition-colors active:scale-95">
+                                class="flex items-center gap-2 bg-on-primary text-primary px-5 py-2.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-bold hover:bg-primary-container transition-colors active:scale-95">
                                 <span class="material-symbols-outlined"
                                     style="font-variation-settings: 'FILL' 1;">play_arrow</span>
                                 Reproducir Experimento
@@ -1153,15 +1270,15 @@ agent.startFormation();</code></pre>
     <!-- Footer Global -->
     <footer class="bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant w-full mt-auto">
         <div
-            class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto">
-            <div class="flex flex-row gap-4 items-center">
-                <div class="flex items-center gap-2">
+            class="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-lg w-full max-w-container-max-width mx-auto gap-4">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center text-center sm:text-left">
+                <div class="flex items-center gap-2 shrink-0">
                     <img alt="RÜPÜ Logo" class="h-10 w-auto opacity-80" src="assets/img/logo_rupu.png" />
                 </div>
                 <p class="font-label-md text-label-md text-on-primary/60 m-0">© 2026 RÜPÜ Robotics System
                     UTFSM. Todos los derechos reservados.</p>
             </div>
-            <div class="flex gap-stack-lg mt-stack-md md:mt-0">
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-stack-lg mt-2 md:mt-0">
                 <a class="font-label-md text-label-md text-secondary-fixed hover:text-surface-white transition-colors opacity-100 hover:opacity-80"
                     href="https://github.com/FRifoM99/RUPU" target="_blank" rel="noopener noreferrer">Repositorio
                     GitHub</a>
